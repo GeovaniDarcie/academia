@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "oIUi7RCZZl6kDQ3hxvDA1QIGdJYTZ6hWI0z63DMJJ68T0s3KEPfRw16XwBJYOMGMDzxgxRRHED4bBd7tiGvjOg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Domain\\Academia.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\geova\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
