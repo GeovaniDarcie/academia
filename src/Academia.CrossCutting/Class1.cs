@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Academia.Infra
+namespace Academia.CrossCutting
 {
     public class Class1
     {

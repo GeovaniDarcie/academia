@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Infra\\Academia.Infra.csproj",
-      "projectName": "Academia.Infra",
-      "projectPath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Infra\\Academia.Infra.csproj",
+      "projectUniqueName": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Service\\Academia.Service.csproj",
+      "projectName": "Academia.Service",
+      "projectPath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Service\\Academia.Service.csproj",
       "packagesPath": "C:\\Users\\geova\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Infra\\obj\\",
+      "outputPath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

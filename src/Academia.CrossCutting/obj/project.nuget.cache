@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+87RGHPdAz7v9UiFypd8KWSQJfnokE4jInChhkKAqHQutzTzNAtF/aR1+jSU4Ff4OYVkafkkwv6KwNDVxi0giw==",
+  "dgSpecHash": "eVuErb7qVcwm4MgTuwRg4QklaW9vDwyB4RQvNmWLAnX9rJU+iW3lwAUuPhjO/6TbzSSJKM65ZYp5zU0rhDZbvg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.Infra\\Academia.Infra.csproj",
+  "projectFilePath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\src\\Academia.CrossCutting\\Academia.CrossCutting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\geova\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
