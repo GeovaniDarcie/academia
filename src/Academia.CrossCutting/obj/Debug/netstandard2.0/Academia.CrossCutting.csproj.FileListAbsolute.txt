@@ -1,0 +1,9 @@
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netstandard2.0\Academia.CrossCutting.deps.json
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netstandard2.0\Academia.CrossCutting.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netstandard2.0\Academia.CrossCutting.pdb
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.csprojAssemblyReference.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.AssemblyInfoInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.AssemblyInfo.cs
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.csproj.CoreCompileInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netstandard2.0\Academia.CrossCutting.pdb

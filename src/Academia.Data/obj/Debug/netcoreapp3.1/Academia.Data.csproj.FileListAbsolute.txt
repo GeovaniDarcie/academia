@@ -1,0 +1,12 @@
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.deps.json
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.pdb
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Domain.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Domain.pdb
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csprojAssemblyReference.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.AssemblyInfoInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.AssemblyInfo.cs
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csproj.CoreCompileInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csproj.CopyComplete
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.pdb
