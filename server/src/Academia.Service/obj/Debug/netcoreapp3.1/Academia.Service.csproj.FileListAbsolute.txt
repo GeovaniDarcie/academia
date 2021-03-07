@@ -1,0 +1,9 @@
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\bin\Debug\netcoreapp3.1\Academia.Service.deps.json
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\bin\Debug\netcoreapp3.1\Academia.Service.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\bin\Debug\netcoreapp3.1\Academia.Service.pdb
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.csprojAssemblyReference.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.AssemblyInfoInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.AssemblyInfo.cs
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.csproj.CoreCompileInputs.cache
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.dll
+C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.Service\obj\Debug\netcoreapp3.1\Academia.Service.pdb
