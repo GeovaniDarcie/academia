@@ -1,0 +1,7 @@
+/.vscode
+
+server\src\Academia.Application\bin\*
+server\src\Academia.CrossCutting\bin\*
+server\src\Academia.Data\bin\*
+server\src\Academia.Domain\bin\*
+server\src\Academia.Service\bin\*

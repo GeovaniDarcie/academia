@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HMtGj7ElLROlJeUN22wPuS9OjkLboi67aZvWbQeSLu5ELNzcruzvaAu2V1+Q1IBxKAZQ/b67KAfWNe1C4mcPPA==",
+  "dgSpecHash": "pExBhYDNKLDsvWaIogzw+THvhHsX7HjsmYcjUWWMR7C7CHPKneLm1T+5wJo5XMsTCPksfh7K6745tJTWJBDl0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\geova\\OneDrive\\Documentos\\GitHub\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj",
+  "projectFilePath": "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

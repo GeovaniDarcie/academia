@@ -43,7 +43,13 @@ namespace Academia.Application.Controllers
         {
             if (aluno.Id > 0)
             {
-                _context.Alunos.Update(aluno);
+                var alunoNoDb = await _context.Alunos.FirstOrDefaultAsync(x => x.Id == aluno.Id);
+
+                if (alunoNoDb == null) {
+                    return null;
+                }
+
+                _context.Alunos.Update(alunoNoDb);
                 await _context.SaveChangesAsync();
                 return "sucess";
             }
