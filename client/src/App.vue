@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Form from "./components/Form";
+import Form from "./View/Form/Form.vue";
 
 export default {
   name: "App",

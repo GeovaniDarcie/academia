@@ -22,16 +22,19 @@ namespace Academia.Application.Controllers
         }
 
         [HttpGet]
-        public IQueryable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return _context.Alunos.Select(a => $"{a.Id}, {a.Nome}");
+            var list = await _context.Alunos.OrderBy(x => x.Nome)
+                                      .ToListAsync();
+            return Ok(list);
         }
 
         [HttpPost]
         public async Task<string> Post([FromBody] Aluno aluno)
         {
-            _context.Add(new Aluno(aluno.Nome));
-            await _context.SaveChangesAsync();
+            _context.Add(new Aluno(aluno.Nome, aluno.Sobrenome, aluno.DataDeNascimento,
+            aluno.Sexo, aluno.Cpf, aluno.Email, aluno.DataDePagamento));
+               await _context.SaveChangesAsync();
             return "sucess";
         }
 
@@ -50,10 +53,10 @@ namespace Academia.Application.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<string> Delete(Aluno aluno)
+        [HttpDelete("{id}")]
+        public async Task<string> Delete(long id)
         {
-            var _aluno = _context.Alunos.Find(aluno.Id);
+            var _aluno = _context.Alunos.Find(id);
             _context.Alunos.Remove(_aluno);
             await _context.SaveChangesAsync();
 
