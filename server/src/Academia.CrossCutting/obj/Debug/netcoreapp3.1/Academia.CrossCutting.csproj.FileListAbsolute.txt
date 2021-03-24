@@ -1,9 +1,0 @@
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netcoreapp3.1\Academia.CrossCutting.deps.json
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netcoreapp3.1\Academia.CrossCutting.dll
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\bin\Debug\netcoreapp3.1\Academia.CrossCutting.pdb
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.csprojAssemblyReference.cache
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.AssemblyInfoInputs.cache
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.AssemblyInfo.cs
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.csproj.CoreCompileInputs.cache
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.dll
-C:\Users\geova\OneDrive\Documentos\GitHub\academia\src\Academia.CrossCutting\obj\Debug\netcoreapp3.1\Academia.CrossCutting.pdb
