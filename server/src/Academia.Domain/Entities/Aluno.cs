@@ -1,6 +1,6 @@
 using System;
 
-namespace Academia.Domain.Models
+namespace Academia.Domain.Entities
 {
     public class Aluno : BaseEntity
     {

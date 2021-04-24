@@ -20,7 +20,7 @@ namespace Academia.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Academia.Domain.Models.Aluno", b =>
+            modelBuilder.Entity("Academia.Domain.Entities.Aluno", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
