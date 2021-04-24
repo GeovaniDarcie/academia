@@ -10,8 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Academia.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Academia.CrossCutting.DependencyInjection;
+using Academia.Data.Context;
 
 namespace Academia.Application
 {
@@ -27,6 +28,12 @@ namespace Academia.Application
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AcademiaContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConexaoSqlServer")));
+
+            ConfigureService.ConfigureDependenciesService(services);
+            ConfigureRepository.ConfigureDependenciesRespository(services);
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
@@ -39,10 +46,6 @@ namespace Academia.Application
             });
 
             services.AddControllers();
-
-            services.AddDbContext<AcademiaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ConexaoSqlServer")));
-
             services.AddControllers().AddNewtonsoftJson();
         }
 
