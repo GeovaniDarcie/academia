@@ -28,18 +28,26 @@
         <span
           ><b>Nome completo: </b> {{ `${aluno.nome} ${aluno.sobrenome}` }}</span
         >
-        <span><b>Cel:</b> {{ `${aluno.celular}` }}</span>
-        <span><b>CPF:</b> {{ `${aluno.cpf}` }}</span>
+        <span><b>Cel:</b> {{ aluno.celular }}</span>
+        <span><b>CPF:</b> {{ aluno.cpf }}</span>
         <span>
-          <b>Data da Matrícula:</b> {{ `${aluno.inicioDeMatricula}` }}</span
+          <b>Data da Matrícula:</b>
+          {{
+            new Date(aluno.inicioDeMatricula).toLocaleDateString("pt-BR", {
+              timeZone: "UTC",
+            })
+          }}</span
         >
         <b-icon
+          class="icones"
           icon="pencil-square"
           variant="info"
           aria-hidden="true"
           @click="editarAluno(aluno.id)"
         ></b-icon>
+
         <b-icon
+          class="icones"
           icon="trash-fill"
           variant="danger"
           aria-hidden="true"
@@ -122,6 +130,23 @@ export default {
 }
 .elementosDaLista {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+}
+
+@media (max-width: 900px) {
+  body {
+    background-image: none;
+    background-color: rgb(85, 81, 81);
+  }
+
+  .elementosDaLista {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icones {
+    align-self: flex-end;
+    margin: 5px;
+  }
 }
 </style>

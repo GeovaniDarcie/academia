@@ -1,18 +1,21 @@
 import axios from "axios";
 
+const route = 'https://localhost:5001/academia/alunos';
+
 export function cadastrar(aluno) {
     return new Promise((resolve) => {
         axios
-            .post("https://localhost:5001/Aluno", {
+            .post(route, {
                 nome: aluno.nome,
                 sobrenome: aluno.sobrenome,
-                dataDeNascimento: aluno.dataDeNascimento,
-                sexo: aluno.sexo,
-                cpf: aluno.cpf,
                 email: aluno.email,
-                dataDePagamento: aluno.dataDePagamento,
+                celular: aluno.celular,
+                cpf: aluno.cpf,
+                dataDeNascimento: aluno.dataDeNascimento,
+                genero: aluno.genero,
+                inicioDeMatricula: aluno.inicioDeMatricula
             }).then((response) => {
-                if (response.status == 200) {
+                if (response.status == 201) {
                     resolve(1)
                 }
             });
@@ -22,7 +25,7 @@ export function cadastrar(aluno) {
 export function buscar() {
     return new Promise(resolve => {
         axios
-            .get("https://localhost:5001/Aluno")
+            .get(route)
             .then((response) => resolve(response.data));
     })
 
@@ -30,7 +33,7 @@ export function buscar() {
 
 export function remover(id) {
     return new Promise(resolve => {
-        axios.delete(`https://localhost:5001/Aluno/${id}`).then((response) => {
+        axios.delete(`${route}/${id}`).then((response) => {
             if (response.status == 200) {
                 resolve(1);
             }

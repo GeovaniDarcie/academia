@@ -7,6 +7,7 @@
       :header-text-variant="textModal"
       :footer-bg-variant="backgroundModal"
       :footer-text-variant="textModal"
+      class="modal"
     >
       <b-container fluid>
         <b-row class="mb-1">

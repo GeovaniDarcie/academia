@@ -6,22 +6,24 @@ namespace Academia.Domain.Entities
     {
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public string DataDeNascimento { get; set; }
-        public string Sexo { get; set; }
-        public string Cpf { get; set; }
         public string Email { get; set; }
-        public string DataDePagamento { get; set; }
+        public string Celular { get; set; }
+        public string Cpf { get; set; }
+        public DateTime DataDeNascimento { get; set; }
+        public string Genero { get; set; }
+        public DateTime InicioDeMatricula { get; set; }
 
-        public Aluno(string nome, string sobrenome, string dataDeNascimento, string sexo,
-                    string cpf, string email, string dataDePagamento)
+        public Aluno(string nome, string sobrenome, string email, string celular,
+                    string cpf, DateTime dataDeNascimento, string genero, DateTime inicioDeMatricula)
         {
             Nome = nome;
             Sobrenome = sobrenome;
-            DataDeNascimento = dataDeNascimento;
-            Sexo = sexo;
+            Email = email;
+            Celular = celular;
             Cpf = cpf;
-            Email = Email;
-            DataDePagamento = dataDePagamento;
+            DataDeNascimento = dataDeNascimento;
+            Genero = genero;
+            InicioDeMatricula = inicioDeMatricula;
         }
 
     }
