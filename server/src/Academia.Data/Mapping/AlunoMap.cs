@@ -1,4 +1,4 @@
-using Academia.Domain.Models;
+using Academia.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

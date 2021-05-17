@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Academia.Domain.Models;
 
+using Academia.Domain.Entities;
 namespace Academia.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
@@ -11,5 +11,6 @@ namespace Academia.Domain.Interfaces
         Task<bool> DeleteAsync(long id);
         Task<T> SelectAsync(long id);
         Task<IEnumerable<T>> SelectAsync();
+        Task<bool> ExistAsync(long id);
     }
 }

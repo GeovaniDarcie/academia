@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Academia.Domain.Models;
+using Academia.Domain.Entities;
 using Academia.Data.Mapping;
 
 namespace Academia.Data.Context

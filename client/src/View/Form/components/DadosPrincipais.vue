@@ -1,78 +1,89 @@
 <template>
   <div>
-    <b-form class="inline">
-      <b-form-group id="input-group-1" label="Nome: " label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="nome"
-          placeholder="Digite seu nome"
-        ></b-form-input>
-      </b-form-group>
+    <div class="formulario">
+      <b-form inline>
+        <b-form-group id="input-group-1" label="Nome: " label-for="input-1">
+          <b-form-input
+            id="input-1"
+            v-model="nome"
+            placeholder="Digite seu nome"
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group id="input-group-2" label="Sobrenome: " label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="sobrenome"
-          class="mr-2 ml-2"
-          placeholder="Digite seu sobrenome"
-        ></b-form-input>
-      </b-form-group>
-    </b-form>
-    <b-form-group
-      id="input-group-3"
-      label="Data de Nascimento: "
-      label-for="input-3"
-    >
-      <b-form-input
-        id="input-3"
-        v-model="dataDeNascimento"
-        type="date"
-        class="mr-2 ml-2"
-        placeholder="Data de nascimento: "
-      ></b-form-input>
-    </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Sobrenome: "
+          label-for="input-2"
+        >
+          <b-form-input
+            id="input-2"
+            v-model="sobrenome"
+            class="mr-2 ml-2"
+            placeholder="Digite seu sobrenome"
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
+      <b-form inline>
+        <b-form-group
+          id="input-group-3"
+          label="Data de Nascimento: "
+          label-for="input-3"
+        >
+          <b-form-input
+            id="input-3"
+            v-model="dataDeNascimento"
+            type="date"
+            class="mr-2 ml-2"
+            placeholder="Data de nascimento: "
+          ></b-form-input>
+        </b-form-group>
 
-    <b-form-group id="input-group-4" label="Sexo: " label-for="input-4">
-      <b-form-input
-        id="input-4"
-        v-model="sexo"
-        class="mr-2 ml-2"
-        placeholder="Sexo: "
-      ></b-form-input>
-    </b-form-group>
+        <b-form-group id="input-group-4" label="Sexo: " label-for="input-4">
+          <b-form-input
+            id="input-4"
+            v-model="sexo"
+            class="mr-2 ml-2"
+            placeholder="Sexo: "
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
 
-    <b-form-group id="input-group-5" label="Cpf: " label-for="input-5">
-      <b-form-input
-        id="input-5"
-        v-model="cpf"
-        class="mr-2 ml-2"
-        placeholder="Cpf"
-      ></b-form-input>
-    </b-form-group>
+      <b-form inline>
+        <b-form-group id="input-group-5" label="Cpf: " label-for="input-5">
+          <b-form-input
+            id="input-5"
+            v-model="cpf"
+            class="mr-2 ml-2"
+            placeholder="Cpf"
+          ></b-form-input>
+        </b-form-group>
 
-    <b-form-group id="input-group-6" label="Email: " label-for="input-6">
-      <b-form-input
-        id="input-6"
-        v-model="email"
-        class="mr-2 ml-2"
-        placeholder="Email: "
-        type="email"
-      ></b-form-input>
-    </b-form-group>
+        <b-form-group id="input-group-6" label="Email: " label-for="input-6">
+          <b-form-input
+            id="input-6"
+            v-model="email"
+            class="mr-2 ml-2"
+            placeholder="Email: "
+            type="email"
+          ></b-form-input>
+        </b-form-group>
 
-    <b-form-group
-      id="input-group-7"
-      label="Data de pagamento: "
-      label-for="input-7"
-    >
-      <b-form-input
-        id="input-7"
-        v-model="dataDePagamento"
-        class="mr-2 ml-2"
-        placeholder="Data de Pagamento: "
-        type="date"
-      ></b-form-input>
-    </b-form-group>
+        <b-form-group
+          id="input-group-7"
+          label="Data de pagamento: "
+          label-for="input-7"
+        >
+          <b-form-input
+            id="input-7"
+            v-model="dataDePagamento"
+            class="mr-2 ml-2"
+            placeholder="Data de Pagamento: "
+            type="date"
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
+    </div>
+
     <b-button variant="primary" @click="cadastrar">Salvar</b-button>
 
     <b-list-group
@@ -123,7 +134,15 @@ export default {
   methods: {
     cadastrar() {
       axios
-        .post("https://localhost:5001/Aluno", { nome: this.nome })
+        .post("https://localhost:5001/Aluno", {
+          nome: this.nome,
+          sobrenome: this.sobrenome,
+          dataDeNascimento: this.dataDeNascimento,
+          sexo: this.sexo,
+          cpf: this.cpf,
+          email: this.email,
+          dataDePagamento: this.dataDePagamento,
+        })
         .then((response) => {
           if (response.status == 200) {
             this.buscar();
@@ -162,12 +181,12 @@ export default {
 </script>
 
 <style>
-/* .formulario {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.formulario {
+  display: flex;
+  justify-content: end;
 }
 
 .tamanho {
   width: 50%;
-} */
+}
 </style>

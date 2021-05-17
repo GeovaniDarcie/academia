@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academia.Data.Migrations
 {
     [DbContext(typeof(AcademiaContext))]
-    [Migration("20210315013106_PropriedadesAluno")]
-    partial class PropriedadesAluno
+    [Migration("20210425232220_Aluno")]
+    partial class Aluno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,10 +39,10 @@ namespace Academia.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Genero")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Sexo")
+                    b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sobrenome")

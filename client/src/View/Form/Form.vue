@@ -1,18 +1,22 @@
 <template>
-  <DadosPrincipais />
+  <div>
+    <Header />
+    <Main />
+  </div>
 </template>
 
 <script>
-import DadosPrincipais from "./components/DadosPrincipais.vue";
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
 
 export default {
   name: "Form",
   components: {
-    DadosPrincipais,
+    Header,
+    Main,
   },
 };
 </script>
 
 <style>
-
 </style>

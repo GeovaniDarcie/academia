@@ -1,4 +1,4 @@
-namespace Academia.Domain.Models
+namespace Academia.Domain.Entities
 {
     public abstract class BaseEntity
     {
