@@ -7,7 +7,7 @@ namespace Academia.Data.Context
     {
         public AcademiaContext CreateDbContext(string[] args)
         {
-            var connectionString = "Integrated Security=SSPI;Persist Security Info=False;User ID=sa;Initial Catalog=academiadb;Data Source=localhost\\SQLEXPRESS";
+            var connectionString = "Integrated Security=true;Initial Catalog=academiadb;Data Source=DESKTOP-1P1RRGF\\SQLEXPRESS";
             var optionsBuilder = new DbContextOptionsBuilder<AcademiaContext>();
             optionsBuilder.UseSqlServer(connectionString);
             return new AcademiaContext(optionsBuilder.Options);

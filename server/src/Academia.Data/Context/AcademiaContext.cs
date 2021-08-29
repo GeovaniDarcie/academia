@@ -17,5 +17,6 @@ namespace Academia.Data.Context
             modelBuilder.Entity<Aluno>(new AlunoMap().Configure);
         }
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Admin> Admin { get; set; }
     }
 }

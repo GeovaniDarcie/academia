@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academia.Data.Migrations
 {
     [DbContext(typeof(AcademiaContext))]
-    [Migration("20210425233042_AlunoAtual")]
-    partial class AlunoAtual
+    [Migration("20210829211608_Aluno_Admin")]
+    partial class Aluno_Admin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,36 @@ namespace Academia.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Academia.Domain.Entities.Admin", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sobrenome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admin");
+                });
+
             modelBuilder.Entity("Academia.Domain.Entities.Aluno", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AdminId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Celular")
                         .HasColumnType("nvarchar(max)");
@@ -54,7 +78,25 @@ namespace Academia.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdminId");
+
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("Academia.Domain.Entities.Aluno", b =>
+                {
+                    b.HasOne("Academia.Domain.Entities.Admin", "Admin")
+                        .WithMany("Alunos")
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Admin");
+                });
+
+            modelBuilder.Entity("Academia.Domain.Entities.Admin", b =>
+                {
+                    b.Navigation("Alunos");
                 });
 #pragma warning restore 612, 618
         }

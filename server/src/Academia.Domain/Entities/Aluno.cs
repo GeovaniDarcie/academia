@@ -12,6 +12,8 @@ namespace Academia.Domain.Entities
         public DateTime DataDeNascimento { get; set; }
         public string Genero { get; set; }
         public DateTime InicioDeMatricula { get; set; }
+        public long AdminId { get; set; }
+        public Admin Admin { get; set; }
 
         public Aluno(string nome, string sobrenome, string email, string celular,
                     string cpf, DateTime dataDeNascimento, string genero, DateTime inicioDeMatricula)

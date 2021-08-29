@@ -5814,40 +5814,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Geovani Darcie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Data\\Academia.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Geovani Darcie\\Documents\\academia\\server\\src\\Academia.Data\\Academia.Data.csproj",
       "projectName": "Academia.Data",
-      "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Data\\Academia.Data.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Data\\obj\\",
+      "projectPath": "C:\\Users\\Geovani Darcie\\Documents\\academia\\server\\src\\Academia.Data\\Academia.Data.csproj",
+      "packagesPath": "C:\\Users\\Geovani Darcie\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Geovani Darcie\\Documents\\academia\\server\\src\\Academia.Data\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Geovani Darcie\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj": {
-              "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj"
+            "C:\\Users\\Geovani Darcie\\Documents\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj": {
+              "projectPath": "C:\\Users\\Geovani Darcie\\Documents\\academia\\server\\src\\Academia.Domain\\Academia.Domain.csproj"
             }
           }
         }
@@ -5893,7 +5884,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.412\\RuntimeIdentifierGraph.json"
       }
     }
   }

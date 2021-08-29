@@ -13,3 +13,18 @@ C:\Users\andre\Documents\GitHub\academia\server\src\Academia.Data\obj\Debug\netc
 C:\Users\andre\Documents\GitHub\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.dll
 C:\Users\andre\Documents\GitHub\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.pdb
 C:\Users\andre\Documents\GitHub\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.genruntimeconfig.cache
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.deps.json
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.runtimeconfig.json
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.runtimeconfig.dev.json
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.dll
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Data.pdb
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Domain.dll
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\bin\Debug\netcoreapp3.1\Academia.Domain.pdb
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csprojAssemblyReference.cache
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.AssemblyInfoInputs.cache
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.AssemblyInfo.cs
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csproj.CoreCompileInputs.cache
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.csproj.CopyComplete
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.dll
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.pdb
+C:\Users\Geovani Darcie\Documents\academia\server\src\Academia.Data\obj\Debug\netcoreapp3.1\Academia.Data.genruntimeconfig.cache
