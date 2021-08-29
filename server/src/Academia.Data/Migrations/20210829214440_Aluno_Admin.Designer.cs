@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academia.Data.Migrations
 {
     [DbContext(typeof(AcademiaContext))]
-    [Migration("20210829211608_Aluno_Admin")]
+    [Migration("20210829214440_Aluno_Admin")]
     partial class Aluno_Admin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
