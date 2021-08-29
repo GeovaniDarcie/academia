@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Academia.Domain.DTOs;
 
 namespace Academia.Application.Controllers
 {
@@ -55,7 +56,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Admin admin)
+        public async Task<IActionResult> Post([FromBody] AdminInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +65,7 @@ namespace Academia.Application.Controllers
 
             try
             {
+                var admin = new Admin(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email);
                 var result = await _service.Post(admin);
                 if (result != null)
                 {
@@ -82,7 +84,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Admin admin)
+        public async Task<IActionResult> Put(long id, [FromBody] AdminInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -91,6 +93,8 @@ namespace Academia.Application.Controllers
 
             try
             {
+                var admin = new Admin(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email);
+                admin.Id = id;
                 var result = await _service.Put(admin);
                 if (result != null)
                 {
