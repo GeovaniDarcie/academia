@@ -66,7 +66,7 @@ namespace Academia.Application.Controllers
             try
             {
                 var aluno = new Aluno(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email, inputDTO.Celular,
-                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AdminId);
+                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AcademiaId);
                 var result = await _service.Post(aluno);
                 if (result != null)
                 {
@@ -95,7 +95,7 @@ namespace Academia.Application.Controllers
             try
             {
                 var aluno = new Aluno(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email, inputDTO.Celular,
-                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AdminId);
+                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AcademiaId);
                 aluno.Id = id;
                 var result = await _service.Put(aluno);
                 if (result != null)

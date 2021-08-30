@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Academia.Domain.Entities
 {
-    public class Admin : BaseEntity
+    public class Professor : BaseEntity
     {
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
@@ -11,7 +11,7 @@ namespace Academia.Domain.Entities
         public long AcademiaId { get; set; }
         public AcademiaEntity Academia { get; set; }
 
-        public Admin(string nome, string sobrenome, string email, long academiaId)
+        public Professor(string nome, string sobrenome, string email, long academiaId)
         {
             Nome = nome;
             Sobrenome = sobrenome;

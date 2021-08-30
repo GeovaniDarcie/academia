@@ -16,7 +16,15 @@ namespace Academia.Data.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Aluno>(new AlunoMap().Configure);
         }
+
+        public DbSet<Aluno> Academias { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Admin> Admin { get; set; }
+        public DbSet<Professor> Professores { get; set; }
+
+
+        public DbSet<Anamnese> Anamneses { get; set; }
+        public DbSet<Antropometria> Antropometrias { get; set; }
+        public DbSet<DobrasCutaneas> DobrasCutaneas { get; set; }
     }
 }

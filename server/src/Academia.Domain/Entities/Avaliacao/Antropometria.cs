@@ -4,19 +4,22 @@ using Academia.Domain.Entities.Enums;
 
 namespace Academia.Domain.Entities
 {
-    public class Antropometria
+    public class Antropometria : BaseEntity
     {
        public double Peso { get; set; } 
        public double Altura { get; set; }
        public IMC IMC { get; private set; }
        public int PercentualDeGordura { get; set; }
        public double MassaMuscular { get; set; }
+       public long AlunoId { get; set; }
+       public Aluno Aluno { get; set; }
 
-       public Antropometria (double peso, double altura, int percentualDeGordura, double massaMuscular) {
+      public Antropometria (double peso, double altura, int percentualDeGordura, double massaMuscular, long alunoId) {
            Peso = peso;
            Altura = altura;
            PercentualDeGordura = percentualDeGordura;
            MassaMuscular = massaMuscular;
+           AlunoId = alunoId;
 
            CalculoIMC();
        }
@@ -40,9 +43,7 @@ namespace Academia.Domain.Entities
                IMC = IMC.Obesidade;
 
             if(imc >= 40)
-               IMC = IMC.ObesidadeMorbida;           
-
-          Console.WriteLine(IMC);    
+               IMC = IMC.ObesidadeMorbida;               
        }
     }
 }

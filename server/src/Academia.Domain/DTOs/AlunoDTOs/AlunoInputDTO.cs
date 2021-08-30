@@ -13,10 +13,10 @@ namespace Academia.Domain.DTOs
         public DateTime DataDeNascimento { get; set; }
         public string Genero { get; set; }
         public DateTime InicioDeMatricula { get; set; }
-        public long AdminId { get; set; }
+        public long AcademiaId { get; set; }
 
         public AlunoInputDTO(string nome, string sobrenome, string email, string celular,
-                    string cpf, DateTime dataDeNascimento, string genero, DateTime inicioDeMatricula, long adminId)
+                    string cpf, DateTime dataDeNascimento, string genero, DateTime inicioDeMatricula, long academiaId)
         {
             Nome = nome;
             Sobrenome = sobrenome;
@@ -26,7 +26,7 @@ namespace Academia.Domain.DTOs
             DataDeNascimento = dataDeNascimento;
             Genero = genero;
             InicioDeMatricula = inicioDeMatricula;
-            AdminId = adminId;
+            AcademiaId = academiaId;
         }
 
     }
