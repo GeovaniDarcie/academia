@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
-namespace Academia.Domain.Entities
+namespace Academia.Domain.DTOs
 {
-    public class Aluno : BaseEntity
+    public class AlunoInputDTO
     {
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
@@ -13,9 +14,8 @@ namespace Academia.Domain.Entities
         public string Genero { get; set; }
         public DateTime InicioDeMatricula { get; set; }
         public long AdminId { get; set; }
-        public Admin Admin { get; set; }
 
-        public Aluno(string nome, string sobrenome, string email, string celular,
+        public AlunoInputDTO(string nome, string sobrenome, string email, string celular,
                     string cpf, DateTime dataDeNascimento, string genero, DateTime inicioDeMatricula, long adminId)
         {
             Nome = nome;

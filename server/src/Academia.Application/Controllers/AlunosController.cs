@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services.Alunos;
 using Microsoft.AspNetCore.Mvc;
+using Academia.Domain.DTOs;
 
 namespace Academia.Application.Controllers
 {
@@ -55,7 +56,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Aluno aluno)
+        public async Task<IActionResult> Post([FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +65,8 @@ namespace Academia.Application.Controllers
 
             try
             {
+                var aluno = new Aluno(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email, inputDTO.Celular,
+                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AdminId);
                 var result = await _service.Post(aluno);
                 if (result != null)
                 {
@@ -82,7 +85,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Aluno aluno)
+        public async Task<IActionResult> Put(long id, [FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -91,6 +94,9 @@ namespace Academia.Application.Controllers
 
             try
             {
+                var aluno = new Aluno(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email, inputDTO.Celular,
+                    inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AdminId);
+                aluno.Id = id;
                 var result = await _service.Put(aluno);
                 if (result != null)
                 {
