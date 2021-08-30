@@ -5,9 +5,11 @@ using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services.Alunos;
 using Microsoft.AspNetCore.Mvc;
 using Academia.Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Academia.Application.Controllers
 {
+    [Authorize]
     [Route("academia/[controller]")]
     public class AlunosController : ControllerBase
     {

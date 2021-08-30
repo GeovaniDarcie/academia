@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Academia.Domain.Entities;
 using Academia.Data.Mapping;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Academia.Data.Context
 {
-    public class AcademiaContext : DbContext
+    public class AcademiaContext : IdentityDbContext<ApplicationUser>
     {
         public AcademiaContext(DbContextOptions<AcademiaContext> options)
         : base(options)
