@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academia.Data.Migrations
 {
     [DbContext(typeof(AcademiaContext))]
-    [Migration("20210830140732_Initial")]
-    partial class Initial
+    [Migration("20210830144919_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,7 @@ namespace Academia.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AcademiaEntity");
+                    b.ToTable("Academias");
                 });
 
             modelBuilder.Entity("Academia.Domain.Entities.Admin", b =>
@@ -106,7 +106,7 @@ namespace Academia.Data.Migrations
 
                     b.HasIndex("AcademiaId");
 
-                    b.ToTable("Aluno");
+                    b.ToTable("Alunos");
                 });
 
             modelBuilder.Entity("Academia.Domain.Entities.Anamnese", b =>

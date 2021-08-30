@@ -37,7 +37,7 @@ namespace Academia.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AcademiaEntity");
+                    b.ToTable("Academias");
                 });
 
             modelBuilder.Entity("Academia.Domain.Entities.Admin", b =>
@@ -104,7 +104,7 @@ namespace Academia.Data.Migrations
 
                     b.HasIndex("AcademiaId");
 
-                    b.ToTable("Aluno");
+                    b.ToTable("Alunos");
                 });
 
             modelBuilder.Entity("Academia.Domain.Entities.Anamnese", b =>

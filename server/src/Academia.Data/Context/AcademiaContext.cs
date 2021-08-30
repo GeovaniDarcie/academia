@@ -17,7 +17,7 @@ namespace Academia.Data.Context
             modelBuilder.Entity<Aluno>(new AlunoMap().Configure);
         }
 
-        public DbSet<Aluno> Academias { get; set; }
+        public DbSet<AcademiaEntity> Academias { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Professor> Professores { get; set; }

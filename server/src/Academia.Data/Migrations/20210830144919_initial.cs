@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Academia.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AcademiaEntity",
+                name: "Academias",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -19,7 +19,7 @@ namespace Academia.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AcademiaEntity", x => x.Id);
+                    table.PrimaryKey("PK_Academias", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,15 +37,15 @@ namespace Academia.Data.Migrations
                 {
                     table.PrimaryKey("PK_Admin", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Admin_AcademiaEntity_AcademiaId",
+                        name: "FK_Admin_Academias_AcademiaId",
                         column: x => x.AcademiaId,
-                        principalTable: "AcademiaEntity",
+                        principalTable: "Academias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Aluno",
+                name: "Alunos",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -62,11 +62,11 @@ namespace Academia.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aluno", x => x.Id);
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Aluno_AcademiaEntity_AcademiaId",
+                        name: "FK_Alunos_Academias_AcademiaId",
                         column: x => x.AcademiaId,
-                        principalTable: "AcademiaEntity",
+                        principalTable: "Academias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -86,9 +86,9 @@ namespace Academia.Data.Migrations
                 {
                     table.PrimaryKey("PK_Professores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Professores_AcademiaEntity_AcademiaId",
+                        name: "FK_Professores_Academias_AcademiaId",
                         column: x => x.AcademiaId,
-                        principalTable: "AcademiaEntity",
+                        principalTable: "Academias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -108,9 +108,9 @@ namespace Academia.Data.Migrations
                 {
                     table.PrimaryKey("PK_Anamneses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Anamneses_Aluno_AlunoId",
+                        name: "FK_Anamneses_Alunos_AlunoId",
                         column: x => x.AlunoId,
-                        principalTable: "Aluno",
+                        principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -132,9 +132,9 @@ namespace Academia.Data.Migrations
                 {
                     table.PrimaryKey("PK_Antropometrias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Antropometrias_Aluno_AlunoId",
+                        name: "FK_Antropometrias_Alunos_AlunoId",
                         column: x => x.AlunoId,
-                        principalTable: "Aluno",
+                        principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -160,9 +160,9 @@ namespace Academia.Data.Migrations
                 {
                     table.PrimaryKey("PK_DobrasCutaneas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DobrasCutaneas_Aluno_AlunoId",
+                        name: "FK_DobrasCutaneas_Alunos_AlunoId",
                         column: x => x.AlunoId,
-                        principalTable: "Aluno",
+                        principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -173,8 +173,8 @@ namespace Academia.Data.Migrations
                 column: "AcademiaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aluno_AcademiaId",
-                table: "Aluno",
+                name: "IX_Alunos_AcademiaId",
+                table: "Alunos",
                 column: "AcademiaId");
 
             migrationBuilder.CreateIndex(
@@ -216,10 +216,10 @@ namespace Academia.Data.Migrations
                 name: "Professores");
 
             migrationBuilder.DropTable(
-                name: "Aluno");
+                name: "Alunos");
 
             migrationBuilder.DropTable(
-                name: "AcademiaEntity");
+                name: "Academias");
         }
     }
 }
