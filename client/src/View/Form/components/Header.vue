@@ -7,11 +7,28 @@
       fixed="top"
       class="altura-header"
     >
+      <b-button v-b-toggle.sidebar-1>
+        <b-icon icon="grid-fill"></b-icon>
+      </b-button>
+       <b-sidebar id="sidebar-1" aria-labelledby="sidebar-1" shadow>
+      <template #default="{ hide }">
+        <div class="p-3">
+          <h4>Menu</h4>
+          <nav class="mb-3">
+            <b-nav vertical>
+              <b-nav-item href="/avaliacaoFisica" @click="hide">Avaliação Física</b-nav-item>
+            </b-nav>
+          </nav>
+        </div>
+      </template>
+    </b-sidebar>
+    <template>
+</template>
       <b-navbar-brand href="#" class="ml-5 font-header"
         >Academia</b-navbar-brand
       >
       <hr />
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse">Teste</b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
