@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const route = 'https://localhost:5001/academia/alunos';
+const route = 'https://localhost:5001/api/alunos';
 
 const instance = axios.create({
-    baseURL: 'https://localhost:5001/academia/'
+    baseURL: 'https://localhost:5001/api/'
 });
 
 instance.interceptors.request.use(
