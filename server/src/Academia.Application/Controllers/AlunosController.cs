@@ -11,7 +11,7 @@ namespace Academia.Application.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("academia/[controller]")]
+    [Route("api/[controller]")]
     public class AlunosController : ControllerBase
     {
         private IAlunoService _service;

@@ -24,9 +24,14 @@ export default {
     },
     methods: {
         async logar() {
-           const teste = await login(this.username, this.password)
-           console.log(teste);
-           this.$router.push({ name: 'home' })
+           const validou = await login(this.username, this.password)
+
+           if(validou) {
+               this.$router.push({ name: 'home' })
+           } else {
+               this.username = '';
+               this.password = '';
+           }
         }
     }
 }

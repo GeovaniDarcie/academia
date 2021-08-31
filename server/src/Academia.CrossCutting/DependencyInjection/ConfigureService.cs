@@ -13,6 +13,7 @@ namespace Academia.CrossCutting.DependencyInjection
             serviceCollection.AddTransient<IAdminService, AdminService>();
             serviceCollection.AddTransient<IAcademiaEntityService, AcademiaEntityService>();
             serviceCollection.AddTransient<IProfessorService, ProfessorService>();
+            serviceCollection.AddTransient<IAnamneseService, AnamneseService>();
         }
     }
 }

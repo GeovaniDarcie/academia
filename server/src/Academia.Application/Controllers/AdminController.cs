@@ -8,7 +8,7 @@ using Academia.Domain.DTOs;
 
 namespace Academia.Application.Controllers
 {
-    [Route("academia/[controller]")]
+    [Route("api/[controller]")]
     public class AdminController : ControllerBase
     {
         private IAdminService _service;

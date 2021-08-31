@@ -9,15 +9,15 @@ using Academia.Domain.DTOs;
 namespace Academia.Application.Controllers
 {
     [Route("api/[controller]")]
-    public class AcademiaEntityController : ControllerBase
+    public class AnamneseController : ControllerBase
     {
-        private IAcademiaEntityService _service;
-        public AcademiaEntityController(IAcademiaEntityService service)
+        private IAnamneseService _service;
+        public AnamneseController(IAnamneseService service)
         {
             _service = service;
         }
         [HttpGet]
-        public async Task<ActionResult> GetAll([FromServices] IAcademiaEntityService service)
+        public async Task<ActionResult> GetAll([FromServices] IAnamneseService service)
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AcademiaInputDTO inputDTO)
+        public async Task<IActionResult> Post([FromBody] AnamneseInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -65,8 +65,8 @@ namespace Academia.Application.Controllers
 
             try
             {
-                var academia = new AcademiaEntity(inputDTO.Nome, inputDTO.Endereco, inputDTO.Email);
-                var result = await _service.Post(academia);
+                var anamnese = new Anamnese(inputDTO.HabitosGerais, inputDTO.Sedentarismo, inputDTO.Cirurgias, inputDTO.AlunoId);
+                var result = await _service.Post(anamnese);
                 if (result != null)
                 {
                     return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
@@ -84,7 +84,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(long id, [FromBody] AcademiaInputDTO inputDTO)
+        public async Task<IActionResult> Put(long id, [FromBody] AnamneseInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -93,9 +93,10 @@ namespace Academia.Application.Controllers
 
             try
             {
-                var academia = new AcademiaEntity(inputDTO.Nome, inputDTO.Endereco, inputDTO.Email);
-                academia.Id = id;
-                var result = await _service.Put(academia);
+                
+                var anamnese = new Anamnese(inputDTO.HabitosGerais, inputDTO.Sedentarismo, inputDTO.Cirurgias, inputDTO.AlunoId);
+                anamnese.Id = id;
+                var result = await _service.Put(anamnese);
                 if (result != null)
                 {
                     return Ok(result);

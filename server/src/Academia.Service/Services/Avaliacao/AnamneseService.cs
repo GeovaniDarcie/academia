@@ -6,10 +6,10 @@ using Academia.Domain.Interfaces.Services;
 
 namespace Academia.Service.Services
 {
-    public class AdminService : IAdminService
+    public class AnamneseService : IAnamneseService
     {
-        private IRepository<Admin> _repository;
-        public AdminService(IRepository<Admin> repository)
+        private IRepository<Anamnese> _repository;
+        public AnamneseService(IRepository<Anamnese> repository)
         {
             _repository = repository;
         }
@@ -18,24 +18,24 @@ namespace Academia.Service.Services
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<Admin> Get(long id)
+        public async Task<Anamnese> Get(long id)
         {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<IEnumerable<Admin>> GetAll()
+        public async Task<IEnumerable<Anamnese>> GetAll()
         {
             return await _repository.SelectAsync();
         }
 
-        public async Task<Admin> Post(Admin admin)
+        public async Task<Anamnese> Post(Anamnese anamnese)
         {
-            return await _repository.InsertAsync(admin);
+            return await _repository.InsertAsync(anamnese);
         }
 
-        public async Task<Admin> Put(Admin admin)
+        public async Task<Anamnese> Put(Anamnese anamnese)
         {
-            return await _repository.UpdateAsync(admin);
+            return await _repository.UpdateAsync(anamnese);
         }
     }
 }

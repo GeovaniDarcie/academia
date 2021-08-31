@@ -56,9 +56,15 @@ export function remover(id) {
 }
 
 export async function login(username, password) {
-    const response =  await axios
-        .post('https://localhost:5001/Authenticate/login', { username, password })
-    localStorage.setItem("token", response.data.token);
+    try {
+        const response =  await axios
+            .post('https://localhost:5001/Authenticate/login', { username, password })
+
+        localStorage.setItem("token", response.data.token);
+    } catch (e) {
+        alert('Errou fiote');
+        return false;
+    }
 
     return true;
 }

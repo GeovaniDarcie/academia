@@ -8,7 +8,7 @@ using Academia.Domain.DTOs;
 
 namespace Academia.Application.Controllers
 {
-    [Route("Professor/[controller]")]
+    [Route("api/[controller]")]
     public class ProfessoresController : ControllerBase
     {
         private IProfessorService _service;

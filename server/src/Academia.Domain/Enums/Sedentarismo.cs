@@ -13,7 +13,7 @@ namespace Academia.Domain.Entities.Enums
         [Description("se é possível evitar um esforço físico, você o faz. Prefere fazer tudo de carro e detesta carregar peso")]
         Nivel3,
         [Description("Você mal consegue se lembrar da última vez que fez um exercício e passa o dia todo sentado ou deitado")]
-        Nivel4,
+        Nivel4
 
     }
 }
