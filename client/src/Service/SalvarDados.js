@@ -2,6 +2,24 @@ import axios from "axios";
 
 const route = 'https://localhost:5001/academia/alunos';
 
+const instance = axios.create({
+    baseURL: 'https://localhost:5001/academia/'
+});
+
+instance.interceptors.request.use(
+  function(config) {
+    const token = localStorage.getItem("token"); 
+    if (token) {
+      config.headers["Authorization"] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
+
+
 export function cadastrar(aluno) {
     return new Promise((resolve) => {
         axios
@@ -22,13 +40,9 @@ export function cadastrar(aluno) {
     })
 }
 
-export function buscar() {
-    return new Promise(resolve => {
-        axios
-            .get(route)
-            .then((response) => resolve(response.data));
-    })
-
+export async function getAll() {
+    const response = await instance.get('/alunos');
+    return response.data;
 }
 
 export function remover(id) {
@@ -41,26 +55,11 @@ export function remover(id) {
     })
 }
 
-export function login(username, password) {
-    return new Promise((resolve) => {
-        axios
-            .post('https://localhost:5001/Authenticate/login', {
-                username,
-                password,
-            }).then((response) => {
-                resolve(response.data.token)
-            });
-    })
+export async function login(username, password) {
+    const response =  await axios
+        .post('https://localhost:5001/Authenticate/login', { username, password })
+    localStorage.setItem("token", response.data.token);
+
+    return true;
 }
 
-export async function autenticacao(token) {
-    console.log(token)
-    await axios.get('https://localhost:5001/academia/alunos', { headers: {"Authorization" : `Bearer ${token}`} }).then(response => {
-        console.log(response.data)
-    })
-
-    await axios.get('https://localhost:5001/academia/alunos').then(teste => {
-            console.log(teste.data)
-        })
-
-}

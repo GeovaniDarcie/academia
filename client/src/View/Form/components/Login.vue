@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { login, autenticacao } from '../../../Service/SalvarDados';
+import { login } from '../../../Service/SalvarDados';
 
 export default {
     data() {
@@ -24,8 +24,9 @@ export default {
     },
     methods: {
         async logar() {
-           const token = await login(this.username, this.password)
-           autenticacao(token)
+           const teste = await login(this.username, this.password)
+           console.log(teste);
+           this.$router.push({ name: 'home' })
         }
     }
 }

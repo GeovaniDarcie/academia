@@ -61,7 +61,7 @@
 
 <script>
 import ModalCadastro from "./ModalCadastro";
-import { buscar, remover } from "../../../Service/SalvarDados.js";
+import { getAll, remover } from "../../../Service/SalvarDados.js";
 
 export default {
   name: "Main",
@@ -90,7 +90,7 @@ export default {
     },
 
     async buscarAluno() {
-      this.alunos = await buscar();
+      this.alunos = await getAll();
       console.log(this.alunos);
     },
 
