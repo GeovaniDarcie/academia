@@ -45,6 +45,11 @@ export async function getAll() {
     return response.data;
 }
 
+export async function getById(id) {
+    const response = await instance.get(`/alunos/${id}`);
+    return response.data;
+}
+
 export function remover(id) {
     return new Promise(resolve => {
         axios.delete(`${route}/${id}`).then((response) => {

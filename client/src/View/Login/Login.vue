@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { login } from '../../../Service/SalvarDados';
+import { login } from '../../Service/SalvarDados';
 
 export default {
     data() {
@@ -27,7 +27,7 @@ export default {
            const validou = await login(this.username, this.password)
 
            if(validou) {
-               this.$router.push({ name: 'home' })
+               this.$router.push({ name: 'alunos' })
            } else {
                this.username = '';
                this.password = '';

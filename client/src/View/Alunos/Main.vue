@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="right">
       <b-button
         pill
@@ -17,6 +17,7 @@
       @buscarAluno="buscarAluno"
       :edicaoUsuario="edit"
     />
+
     <b-list-group class="lista">
       <b-list-group-item
         v-for="aluno in alunos"
@@ -55,13 +56,12 @@
         ></b-icon>
       </b-list-group-item>
     </b-list-group>
-    <router-link :to="{ name: 'teste' }">User</router-link>
   </div>
 </template>
 
 <script>
-import ModalCadastro from "./ModalCadastro";
-import { getAll, remover } from "../../../Service/SalvarDados.js";
+import ModalCadastro from "../../Components/ModalCadastro";
+import { getAll, remover, getById } from "../../Service/SalvarDados.js";
 
 export default {
   name: "Main",
@@ -91,13 +91,12 @@ export default {
 
     async buscarAluno() {
       this.alunos = await getAll();
-      console.log(this.alunos);
     },
 
     async editarAluno(id) {
       this.mudaModal(true);
-      this.edit = true;
-      this.idAluno = id;
+      const aluno = await getById(id);
+      console.log(aluno);
     },
 
     async deletarAluno(id) {

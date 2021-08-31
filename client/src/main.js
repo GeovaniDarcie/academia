@@ -12,14 +12,14 @@ Vue.use(IconsPlugin)
 
 Vue.use(VueRouter)
 
-import AvaliacaoFisica from './View/Form/components/AvaliacaoFisica'
-import Form from './View/Form/Form'
-import Login from './View/Form/components/Login'
+import Login from './View/Login/Login'
+import Alunos from './View/Alunos/Alunos'
+import Avaliacao from './View/Avaliacao/Avaliacao'
 
 const routes = [
   { path: '/', name: 'login', component: Login },
-  { path: '/Home', name: 'home', component: Form },
-  { path: '/avaliacaoFisica', name: 'AvaliacaoFisica', component: AvaliacaoFisica }
+  { path: '/alunos', name: 'alunos', component: Alunos },
+  { path: '/avaliacao', name: 'avaliacao', component: Avaliacao }
 ]
 
 const router = new VueRouter({

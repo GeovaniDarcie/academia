@@ -1,16 +1,16 @@
 <template>
-  <div class="form">
+  <div class="alunos">
       <Header />
       <Main />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Main from "./components/Main.vue";
+import Header from "../../Components/Header";
+import Main from "./Main";
 
 export default {
-  name: "Form",
+  name: "Alunos",
   components: {
     Header,
     Main,
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
- .form {
+ .alunos {
     height: 100vh;
     background-image: url(https://boaforma.abril.com.br/wp-content/uploads/sites/2/2017/01/thinkstockphotos-530414728.jpg);
     background-size: cover;
@@ -27,7 +27,7 @@ export default {
   }
 
   @media (max-width: 900px) {
-    .form {
+    .alunos {
       background-image: none;
       background-color: rgb(85, 81, 81);
     }

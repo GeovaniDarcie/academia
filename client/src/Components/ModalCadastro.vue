@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { cadastrar, buscar } from "../../../Service/SalvarDados.js";
+import { cadastrar, buscar } from "../Service/SalvarDados.js";
 
 export default {
   name: "ModalCadastro",

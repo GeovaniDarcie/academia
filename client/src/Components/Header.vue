@@ -16,7 +16,7 @@
           <h4>Menu</h4>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/avaliacaoFisica" @click="hide">Avaliação Física</b-nav-item>
+              <b-nav-item href="/avaliacao" @click="hide">Avaliação Física</b-nav-item>
             </b-nav>
           </nav>
         </div>
@@ -28,7 +28,7 @@
         >Academia</b-navbar-brand
       >
       <hr />
-      <b-navbar-toggle target="nav-collapse">Teste</b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
