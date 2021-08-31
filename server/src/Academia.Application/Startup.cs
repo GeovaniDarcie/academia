@@ -18,7 +18,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using Academia.Data.Context;
 
 namespace Academia.Application
 {
@@ -116,6 +115,7 @@ namespace Academia.Application
         {
             if (env.IsDevelopment())
             {
+                app.UseCors("CorsPolicy");
                 app.UseDeveloperExceptionPage();
             }
 
@@ -130,6 +130,7 @@ namespace Academia.Application
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors("CorsPolicy");
 

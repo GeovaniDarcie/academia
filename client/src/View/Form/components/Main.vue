@@ -55,6 +55,7 @@
         ></b-icon>
       </b-list-group-item>
     </b-list-group>
+    <router-link :to="{ name: 'teste' }">User</router-link>
   </div>
 </template>
 

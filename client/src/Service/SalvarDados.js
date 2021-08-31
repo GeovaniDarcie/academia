@@ -40,3 +40,27 @@ export function remover(id) {
         })
     })
 }
+
+export function login(username, password) {
+    return new Promise((resolve) => {
+        axios
+            .post('https://localhost:5001/Authenticate/login', {
+                username,
+                password,
+            }).then((response) => {
+                resolve(response.data.token)
+            });
+    })
+}
+
+export async function autenticacao(token) {
+    console.log(token)
+    await axios.get('https://localhost:5001/academia/alunos', { headers: {"Authorization" : `Bearer ${token}`} }).then(response => {
+        console.log(response.data)
+    })
+
+    await axios.get('https://localhost:5001/academia/alunos').then(teste => {
+            console.log(teste.data)
+        })
+
+}

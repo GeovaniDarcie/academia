@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Academia.Application.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("academia/[controller]")]
     public class AlunosController : ControllerBase
     {
