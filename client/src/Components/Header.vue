@@ -8,7 +8,7 @@
       class="altura-header"
     >
       <b-button v-b-toggle.sidebar-1>
-        <b-icon icon="grid-fill"></b-icon>
+        <b-icon icon="list"></b-icon>
       </b-button>
        <b-sidebar id="sidebar-1" aria-labelledby="sidebar-1" shadow>
       <template #default="{ hide }">

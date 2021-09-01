@@ -1,67 +1,47 @@
 <template>
   <div class="main">
-    <div class="right">
-      <b-button
-        pill
-        @click="novoAluno"
-        class="ml-2 mr-4 mb-2 altura"
-        variant="info"
-        >Novo Aluno</b-button
-      >
-    </div>
-
     <ModalCadastro
       :idAluno="idAluno"
       :mostrarModal="show"
       @mudaValorModal="mudaModal"
       @buscarAluno="buscarAluno"
-      :edicaoUsuario="edit"
     />
-
-    <b-list-group class="lista">
-      <b-list-group-item
-        v-for="aluno in alunos"
-        :key="aluno.id"
-        variant="secondary"
-        button
-        class="elementosDaLista"
-      >
-        <span
-          ><b>Nome completo: </b> {{ `${aluno.nome} ${aluno.sobrenome}` }}</span
+    <b-table
+      id="table-transition-example"
+      :table-variant="'dark'"
+      :items="items"
+      :fields="fields"
+      primary-key="a"
+      hover
+      fixed
+      selectable
+      :select-mode="'single'"
+      @row-selected="onRowSelected"
+      :tbody-transition-props="transProps"
+    >
+      <template #cell(opcoes)="row">
+        <b-button
+          size="sm"
+          @click="info(row.item, row.index, $event.target)"
+          class="mr-1"
         >
-        <span><b>Cel:</b> {{ aluno.celular }}</span>
-        <span><b>CPF:</b> {{ aluno.cpf }}</span>
-        <span>
-          <b>Data da Matrícula:</b>
-          {{
-            new Date(aluno.inicioDeMatricula).toLocaleDateString("pt-BR", {
-              timeZone: "UTC",
-            })
-          }}</span
+          <b-icon icon="pencil-square"></b-icon>
+        </b-button>
+        <b-button
+          size="sm"
+          @click="info(row.item, row.index, $event.target)"
+          class="mr-1"
         >
-        <b-icon
-          class="icones"
-          icon="pencil-square"
-          variant="info"
-          aria-hidden="true"
-          @click="editarAluno(aluno.id)"
-        ></b-icon>
-
-        <b-icon
-          class="icones"
-          icon="trash-fill"
-          variant="danger"
-          aria-hidden="true"
-          @click="deletarAluno(aluno.id)"
-        ></b-icon>
-      </b-list-group-item>
-    </b-list-group>
+          <b-icon icon="trash-fill"></b-icon>
+        </b-button>
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
 import ModalCadastro from "../../Components/ModalCadastro";
-import { getAll, remover, getById } from "../../Service/SalvarDados.js";
+import { getAll, remover } from "../../Service/SalvarDados.js";
 
 export default {
   name: "Main",
@@ -74,12 +54,34 @@ export default {
       show: false,
       edit: false,
       idAluno: 0,
+      transProps: {
+        name: "flip-list",
+      },
+      fields: [
+        { key: "id", sortable: true },
+        { key: "nome", sortable: true },
+        { key: "sobrenome", sortable: true },
+        { key: "email", sortable: true },
+        { key: "celular", sortable: true },
+        { key: 'opcoes', label: 'Opções' }
+      ],
     };
   },
   created() {
     this.buscarAluno();
   },
+
+  computed: {
+    items() {
+      return this.alunos;
+    },
+  },
+
   methods: {
+    onRowSelected(items) {
+      this.selected = items;
+      console.log(this.selected);
+    },
     mudaModal(payload) {
       this.show = payload;
     },
@@ -95,8 +97,7 @@ export default {
 
     async editarAluno(id) {
       this.mudaModal(true);
-      const aluno = await getById(id);
-      console.log(aluno);
+      this.idAluno = id;
     },
 
     async deletarAluno(id) {
@@ -109,44 +110,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.titulo {
-  font-size: 2em;
-  text-align: flex-start;
-  color: rgb(95, 91, 91);
+<style>
+.main {
+  margin: 0 auto;
+  padding: 110px;
 }
-
-.right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.altura {
-  margin-top: 100px;
-}
-
 .lista {
-  opacity: 0.8;
-}
-.elementosDaLista {
-  display: flex;
-  justify-content: space-around;
-}
-
-@media (max-width: 900px) {
-  body {
-    background-image: none;
-    background-color: rgb(85, 81, 81);
-  }
-
-  .elementosDaLista {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .icones {
-    align-self: flex-end;
-    margin: 5px;
-  }
+  opacity: 1;
 }
 </style>

@@ -22,8 +22,8 @@ instance.interceptors.request.use(
 
 export function cadastrar(aluno) {
     return new Promise((resolve) => {
-        axios
-            .post(route, {
+        instance
+            .post('/alunos', {
                 nome: aluno.nome,
                 sobrenome: aluno.sobrenome,
                 email: aluno.email,
@@ -31,7 +31,8 @@ export function cadastrar(aluno) {
                 cpf: aluno.cpf,
                 dataDeNascimento: aluno.dataDeNascimento,
                 genero: aluno.genero,
-                inicioDeMatricula: aluno.inicioDeMatricula
+                inicioDeMatricula: aluno.inicioDeMatricula,
+                academiaId: 1
             }).then((response) => {
                 if (response.status == 201) {
                     resolve(1)
@@ -64,7 +65,7 @@ export async function login(username, password) {
     try {
         const response =  await axios
             .post('https://localhost:5001/Authenticate/login', { username, password })
-
+        console.log(response.data);
         localStorage.setItem("token", response.data.token);
     } catch (e) {
         alert('Errou fiote');

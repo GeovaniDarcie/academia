@@ -94,14 +94,13 @@
 </template>
 
 <script>
-import { cadastrar, buscar } from "../Service/SalvarDados.js";
+import { cadastrar, getById } from "../Service/SalvarDados";
 
 export default {
   name: "ModalCadastro",
   props: {
     mostrarModal: Boolean,
-    edicaoUsuario: Boolean,
-    idAluno: Number,
+    idAluno: Number
   },
   data() {
     return {
@@ -125,6 +124,10 @@ export default {
     };
   },
   methods: {
+    limpaCamposAlunos() {
+      this.aluno = {}
+    },
+
     async salvar() {
       this.showModal = false;
       const value = await cadastrar(this.aluno);
@@ -132,10 +135,21 @@ export default {
         this.$emit("buscarAluno");
       }
     },
+
+    async buscarPorId(id) {
+      const alunoDb = await getById(id);
+      this.aluno = { ...alunoDb }
+      this.aluno.dataDeNascimento = new Date(this.aluno.dataDeNascimento).toISOString().split('T')[0];
+      this.aluno.inicioDeMatricula = new Date(this.aluno.inicioDeMatricula).toISOString().split('T')[0];
+    }
   },
   computed: {
     showModal: {
       get() {
+        if(!this.mostrarModal) {
+          this.limpaCamposAlunos()
+        }
+          
         return this.mostrarModal;
       },
       set(newValue) {
@@ -145,10 +159,11 @@ export default {
   },
 
   watch: {
-    async edicaoUsuario() {
-      this.aluno = await buscar();
-      console.log(this.aluno);
-    },
-  },
+    idAluno() {
+      console.log('aqui')
+      this.buscarPorId(this.idAluno);
+    }
+  }
+
 };
 </script>
