@@ -1,6 +1,19 @@
 <template>
   <div class="main">
+    <div class="right">
+      <b-button
+        pill
+        @click="novoAluno"
+        class="ml-2 mr-4 mb-2 altura"
+        variant="dark"
+      >
+       Cadastrar Aluno
+       <b-icon icon="plus-circle-fill" />
+      </b-button
+      >
+    </div>
     <ModalCadastro
+      :editAluno="edit"
       :idAluno="idAluno"
       :mostrarModal="show"
       @mudaValorModal="mudaModal"
@@ -16,26 +29,37 @@
       fixed
       selectable
       :select-mode="'single'"
+      :current-page="currentPage"
       @row-selected="onRowSelected"
       :tbody-transition-props="transProps"
     >
       <template #cell(opcoes)="row">
         <b-button
           size="sm"
-          @click="info(row.item, row.index, $event.target)"
+          @click="editarAluno(row.item)"
           class="mr-1"
         >
           <b-icon icon="pencil-square"></b-icon>
         </b-button>
         <b-button
           size="sm"
-          @click="info(row.item, row.index, $event.target)"
+          @click="deletarAluno(row.item)"
           class="mr-1"
         >
           <b-icon icon="trash-fill"></b-icon>
         </b-button>
       </template>
     </b-table>
+    <b-col sm="7" md="6" class="my-1">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="totalRows"
+        :per-page="perPage"
+        align="fill"
+        size="sm"
+        class="my-0"
+      ></b-pagination>
+    </b-col>
   </div>
 </template>
 
@@ -61,16 +85,23 @@ export default {
         { key: "id", sortable: true },
         { key: "nome", sortable: true },
         { key: "sobrenome", sortable: true },
-        { key: "email", sortable: true },
+        { key: "cpf", sortable: true },
         { key: "celular", sortable: true },
-        { key: 'opcoes', label: 'Opções' }
+        { key: "opcoes", label: "Opções" },
       ],
+      currentPage: 1,
+      totalRows: 1,
+      perPage: 5,
     };
   },
   created() {
     this.buscarAluno();
   },
 
+  mounted() {
+    // Set the initial number of items
+    this.totalRows = this.items.length;
+  },
   computed: {
     items() {
       return this.alunos;
@@ -80,7 +111,6 @@ export default {
   methods: {
     onRowSelected(items) {
       this.selected = items;
-      console.log(this.selected);
     },
     mudaModal(payload) {
       this.show = payload;
@@ -95,13 +125,15 @@ export default {
       this.alunos = await getAll();
     },
 
-    async editarAluno(id) {
+    async editarAluno(aluno) {
+      console.log(aluno.id)
+      this.edit = true;
       this.mudaModal(true);
-      this.idAluno = id;
+      this.idAluno = aluno.id;
     },
 
-    async deletarAluno(id) {
-      const deletado = await remover(id);
+    async deletarAluno(aluno) {
+      const deletado = await remover(aluno.id);
       if (deletado) {
         this.buscarAluno();
       }
@@ -117,5 +149,10 @@ export default {
 }
 .lista {
   opacity: 1;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

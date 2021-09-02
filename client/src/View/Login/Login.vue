@@ -1,13 +1,13 @@
 <template>
   <div class="containar">
-      <div class="login">
+      <div class="login bg-dark">
           <label for="">Username: </label>
           <input v-model="username" type="text">
 
           <label for="">Password: </label>
-          <input v-model="password" type="text">
+          <input v-model="password" type="password">
 
-          <button @click="logar">Logar</button>
+          <b-button @click="logar">Entrar</b-button>
       </div>
   </div>
 </template>
@@ -50,7 +50,6 @@ export default {
     .login {
         width: 840px;
         height: 90vh;
-        background: rgb(26, 24, 24);
         border-radius: 10px;
         display: flex;
         align-items: center;

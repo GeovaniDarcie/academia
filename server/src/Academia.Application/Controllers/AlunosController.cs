@@ -87,7 +87,7 @@ namespace Academia.Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(long id, [FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)

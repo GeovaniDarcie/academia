@@ -2,7 +2,7 @@
   <div>
     <b-modal
       v-model="showModal"
-      title="Cadastro"
+      :title="this.editAluno ? 'Editar aluno' : 'Cadastrar aluno'"
       :header-bg-variant="backgroundModal"
       :header-text-variant="textModal"
       :footer-bg-variant="backgroundModal"
@@ -12,12 +12,14 @@
       <b-container fluid>
         <b-row class="mb-1">
           <b-col>
+            Nome:
             <b-form-input
               v-model="aluno.nome"
               placeholder="Nome"
             ></b-form-input>
           </b-col>
           <b-col>
+            Sobrenome:
             <b-form-input
               v-model="aluno.sobrenome"
               placeholder="Sobrenome"
@@ -26,6 +28,7 @@
         </b-row>
         <b-row class="mb-1">
           <b-col>
+            E-mail:
             <b-form-input
               v-model="aluno.email"
               placeholder="Email"
@@ -34,12 +37,14 @@
         </b-row>
         <b-row class="mb-1">
           <b-col>
+            Celular:
             <b-form-input
               v-model="aluno.celular"
               placeholder="Celular"
             ></b-form-input>
           </b-col>
           <b-col>
+            CPF:
             <b-form-input v-model="aluno.cpf" placeholder="CPF"></b-form-input>
           </b-col>
         </b-row>
@@ -94,14 +99,16 @@
 </template>
 
 <script>
-import { cadastrar, getById } from "../Service/SalvarDados";
+import { cadastrar, getById, updated } from "../Service/SalvarDados";
 
 export default {
   name: "ModalCadastro",
   props: {
     mostrarModal: Boolean,
-    idAluno: Number
+    idAluno: Number,
+    editAluno: Boolean,
   },
+
   data() {
     return {
       backgroundModal: "dark",
@@ -116,7 +123,6 @@ export default {
         genero: "",
         inicioDeMatricula: "",
       },
-
       options: [
         { item: "A", name: "Masculino" },
         { item: "B", name: "Feminino" },
@@ -130,13 +136,21 @@ export default {
 
     async salvar() {
       this.showModal = false;
-      const value = await cadastrar(this.aluno);
-      if (value) {
-        this.$emit("buscarAluno");
+      if (this.editAluno) {
+        const value = await updated(this.idAluno, this.aluno)
+        if (value) {
+          this.$emit("buscarAluno");
+        }
+      } else {
+        const value = await cadastrar(this.aluno);
+        if (value) {
+          this.$emit("buscarAluno");
+        }
       }
     },
 
     async buscarPorId(id) {
+      console.log('aa')
       const alunoDb = await getById(id);
       this.aluno = { ...alunoDb }
       this.aluno.dataDeNascimento = new Date(this.aluno.dataDeNascimento).toISOString().split('T')[0];
@@ -160,7 +174,6 @@ export default {
 
   watch: {
     idAluno() {
-      console.log('aqui')
       this.buscarPorId(this.idAluno);
     }
   }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const route = 'https://localhost:5001/api/alunos';
+// const route = 'https://localhost:5001/api/alunos';
 
 const instance = axios.create({
     baseURL: 'https://localhost:5001/api/'
@@ -47,13 +47,25 @@ export async function getAll() {
 }
 
 export async function getById(id) {
+    console.log('oi')
     const response = await instance.get(`/alunos/${id}`);
+    console.log(response.data);
+    return response.data;
+}
+
+export async function updated(id, aluno) {
+    delete aluno.id
+    console.log(aluno)
+    console.log(id)
+    const response = await instance.put(`/alunos/${id}`, aluno)
     return response.data;
 }
 
 export function remover(id) {
+    console.log(id);
     return new Promise(resolve => {
-        axios.delete(`${route}/${id}`).then((response) => {
+        console.log(id);
+        instance.delete(`/alunos/${id}`).then((response) => {
             if (response.status == 200) {
                 resolve(1);
             }
@@ -65,7 +77,6 @@ export async function login(username, password) {
     try {
         const response =  await axios
             .post('https://localhost:5001/Authenticate/login', { username, password })
-        console.log(response.data);
         localStorage.setItem("token", response.data.token);
     } catch (e) {
         alert('Errou fiote');
