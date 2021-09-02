@@ -10,11 +10,11 @@
       <b-button v-b-toggle.sidebar-1>
         <b-icon icon="list"></b-icon>
       </b-button>
-       <b-sidebar id="sidebar-1" aria-labelledby="sidebar-1" shadow>
+       <b-sidebar id="sidebar-1" aria-labelledby="sidebar-1" text-variant="light" bg-variant="dark">
       <template #default="{ hide }">
-        <div class="p-3">
+        <div  class="p-3">
           <h4>Menu</h4>
-          <nav class="mb-3">
+          <nav  class="mb-3">
             <b-nav vertical>
               <b-nav-item href="/avaliacao" @click="hide">Avaliação Física</b-nav-item>
             </b-nav>
