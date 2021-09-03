@@ -56,7 +56,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] DobrasCutaneas dobrasCutaneas)
+        public async Task<IActionResult> Post([FromBody] DobrasCutaneasInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -65,6 +65,9 @@ namespace Academia.Application.Controllers
 
             try
             {
+                var dobrasCutaneas = new DobrasCutaneas(inputDTO.Triciptal, inputDTO.Subescapular, inputDTO.Biciptal, inputDTO.AxilarMedia, inputDTO.SupraIliaca,
+                            inputDTO.Toracica, inputDTO.Coxa, inputDTO.Abdominal, inputDTO.PanturrilhaMedial, inputDTO.AlunoId);
+
                 var result = await _service.Post(dobrasCutaneas);
                 if (result != null)
                 {
@@ -83,7 +86,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(long id, [FromBody] DobrasCutaneas dobrasCutaneas)
+        public async Task<IActionResult> Put(long id, [FromBody] DobrasCutaneasInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +95,8 @@ namespace Academia.Application.Controllers
 
             try
             {
-                
+                var dobrasCutaneas = new DobrasCutaneas(inputDTO.Triciptal, inputDTO.Subescapular, inputDTO.Biciptal, inputDTO.AxilarMedia, inputDTO.SupraIliaca,
+                            inputDTO.Toracica, inputDTO.Coxa, inputDTO.Abdominal, inputDTO.PanturrilhaMedial, inputDTO.AlunoId);
                 dobrasCutaneas.Id = id;
                 var result = await _service.Put(dobrasCutaneas);
                 if (result != null)
