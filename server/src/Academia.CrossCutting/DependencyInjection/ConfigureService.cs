@@ -14,6 +14,8 @@ namespace Academia.CrossCutting.DependencyInjection
             serviceCollection.AddTransient<IAcademiaEntityService, AcademiaEntityService>();
             serviceCollection.AddTransient<IProfessorService, ProfessorService>();
             serviceCollection.AddTransient<IAnamneseService, AnamneseService>();
+            serviceCollection.AddTransient<IAntropometriaService, AntropometriaService>();
+            serviceCollection.AddTransient<IDobrasCutaneasService, DobrasCutaneasService>();
         }
     }
 }

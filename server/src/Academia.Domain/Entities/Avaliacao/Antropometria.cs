@@ -14,7 +14,7 @@ namespace Academia.Domain.Entities
        public long AlunoId { get; set; }
        public Aluno Aluno { get; set; }
 
-      public Antropometria (double peso, double altura, int percentualDeGordura, double massaMuscular, long alunoId) {
+      public Antropometria ( double peso, double altura, int percentualDeGordura, double massaMuscular, long alunoId) {
            Peso = peso;
            Altura = altura;
            PercentualDeGordura = percentualDeGordura;
@@ -25,7 +25,7 @@ namespace Academia.Domain.Entities
        }
 
        private void CalculoIMC() {
-           double imc = Peso / Math.Pow(Altura, 2);
+           double imc = Math.Round(Peso / Math.Pow(Altura, 2));
            
            if (imc <= 16) 
               IMC = IMC.Desnutrição;
