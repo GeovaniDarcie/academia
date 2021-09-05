@@ -1,16 +1,10 @@
 <template>
   <div class="main">
     <div class="right">
-      <b-button
-        pill
-        @click="novoAluno"
-        class="ml-2 mr-4 mb-2 altura"
-        variant="dark"
-      >
-       Cadastrar Aluno
-       <b-icon icon="plus-circle-fill" />
-      </b-button
-      >
+      <b-button @click="novoAluno" class="ml-2 mr-4 mb-2" variant="dark">
+        Cadastrar Aluno
+        <b-icon icon="plus-circle-fill" />
+      </b-button>
     </div>
 
     <b-modal
@@ -20,19 +14,20 @@
       :header-text-variant="textModal"
       :footer-bg-variant="backgroundModal"
       :footer-text-variant="textModal"
-      class="modal"
       @ok="handleOk"
     >
-      <ModalCadastro
-        :aluno="aluno"
-        :idAluno="idAluno"
-        :mostrarModal="show"
-        @mudaValorModal="mudaModal"
-        @buscarAluno="buscarAluno"
-      />
-    </b-modal>  
+      <ModalCadastro />
+
+      <template #modal-footer="{ ok, cancel }">
+        <b>Academia</b>
+        <b-button variant="success" @click="ok()"> Salvar </b-button>
+        <b-button variant="danger" @click="cancel()">
+          Cancelar
+        </b-button>
+      </template>
+    </b-modal>
+
     <b-table
-      id="table-transition-example"
       :table-variant="'dark'"
       :items="items"
       :fields="fields"
@@ -42,26 +37,18 @@
       selectable
       :select-mode="'single'"
       :current-page="currentPage"
-      @row-selected="onRowSelected"
       :tbody-transition-props="transProps"
     >
       <template #cell(opcoes)="row">
-        <b-button
-          size="sm"
-          @click="editarAluno(row.item)"
-          class="mr-1"
-        >
+        <b-button size="sm" @click="editarAluno(row.item)" class="mr-1">
           <b-icon icon="pencil-square"></b-icon>
         </b-button>
-        <b-button
-          size="sm"
-          @click="deletarAluno(row.item)"
-          class="mr-1"
-        >
+        <b-button size="sm" @click="deletarAluno(row.item)" class="mr-1">
           <b-icon icon="trash-fill"></b-icon>
         </b-button>
       </template>
     </b-table>
+
     <b-col sm="7" md="6" class="my-1">
       <b-pagination
         v-model="currentPage"
@@ -77,9 +64,9 @@
 </template>
 
 <script>
-import { mapState, mapMutations  } from 'vuex';
+import { mapState, mapActions } from "vuex";
+import { getAll, post, updated, deleteById } from "../../Service/api.js";
 import ModalCadastro from "../../Components/ModalCadastro";
-import { getAll, remover } from "../../Service/SalvarDados.js";
 
 export default {
   name: "Main",
@@ -112,56 +99,57 @@ export default {
       perPage: 5,
     };
   },
-  created() {
-    this.buscarAluno();
+
+  async created() {
+    this.alunos = await getAll();
   },
 
   mounted() {
-    // Set the initial number of items
     this.totalRows = this.items.length;
   },
+
   computed: {
     items() {
       return this.alunos;
     },
-    ...mapState(['aluno'])
+
+    ...mapState(["aluno"]),
   },
 
   methods: {
-    ...mapMutations(['changeAluno']),
-  
-    onRowSelected(items) {
-      this.selected = items;
-    },
-    mudaModal(payload) {
-      this.show = payload;
-    },
+    ...mapActions(["changeAluno"]),
 
     novoAluno() {
-      this.edit = false;
-      this.show = true;
+      // limpa a store (state aluno)
+      this.changeAluno({});
+
+      this.editAluno = false;
+      this.showModal = true;
     },
 
-    async buscarAluno() {
-      this.alunos = await getAll();
-    },
-
-    async editarAluno(aluno) {
+    editarAluno(aluno) {
       this.editAluno = true;
       this.showModal = true;
+
+      //seta o state com o objeto aluno
       this.changeAluno(aluno);
     },
 
     async deletarAluno(aluno) {
-      const deletado = await remover(aluno.id);
+      const deletado = await deleteById(aluno.id);
       if (deletado) {
-        this.buscarAluno();
+        // this.buscarAluno();
       }
     },
 
-    handleOk() {
-      console.log('oi')
-    }
+    async handleOk() {
+      if(this.editAluno) {
+        updated(this.aluno)
+      } else {
+        const aluno = await post(this.aluno)
+        this.alunos.push(aluno);
+      }
+    },
   },
 };
 </script>

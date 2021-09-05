@@ -69,13 +69,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import { cadastrar, getById, updated } from "../Service/SalvarDados";
+import { getById } from "../Service/api";
 
 export default {
   name: "ModalCadastro",
   props: {
     mostrarModal: Boolean,
-    idAluno: Number,
     editAluno: Boolean,
   },
 
@@ -108,21 +107,6 @@ export default {
       console.log('oitro')
     },
 
-    async salvar() {
-      this.showModal = false;
-      if (this.editAluno) {
-        const value = await updated(this.idAluno, this.aluno);
-        if (value) {
-          this.$emit("buscarAluno");
-        }
-      } else {
-        const value = await cadastrar(this.aluno);
-        if (value) {
-          this.$emit("buscarAluno");
-        }
-      }
-    },
-
     async buscarPorId(id) {
       console.log("aa");
       const alunoDb = await getById(id);
@@ -137,18 +121,6 @@ export default {
   },
   computed: {
     ...mapState(['aluno']),
-    showModal: {
-      get() {
-        if (!this.mostrarModal) {
-          this.limpaCamposAlunos();
-        }
-
-        return this.mostrarModal;
-      },
-      set(newValue) {
-        this.$emit("mudaValorModal", newValue);
-      },
-    },
   },
 
   watch: {

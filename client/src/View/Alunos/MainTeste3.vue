@@ -195,7 +195,7 @@
 </template>
 
 <script>
-import { getAll } from "../../Service/SalvarDados.js";
+import { getAll } from "../../Service/api.js";
 export default {
   data() {
     return {

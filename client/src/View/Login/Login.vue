@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { login } from '../../Service/SalvarDados';
+import { login } from '../../Service/api';
 
 export default {
     data() {

@@ -83,7 +83,7 @@
 
 <script>
 import ModalCadastro from "../../Components/ModalCadastro";
-import { getAll, remover } from "../../Service/SalvarDados.js";
+import { getAll, deleteById } from "../../Service/api.js";
 
 export default {
   name: "Main",
@@ -121,7 +121,7 @@ export default {
     },
 
     async deletarAluno(id) {
-      const deletado = await remover(id);
+      const deletado = await deleteById(id);
       if (deletado) {
         this.buscarAluno();
       }

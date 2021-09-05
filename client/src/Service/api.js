@@ -1,12 +1,10 @@
 import axios from "axios";
 
-// const route = 'https://localhost:5001/api/alunos';
-
-const instance = axios.create({
+const api = axios.create({
     baseURL: 'https://localhost:5001/api/'
 });
 
-instance.interceptors.request.use(
+api.interceptors.request.use(
   function(config) {
     const token = localStorage.getItem("token"); 
     if (token) {
@@ -20,35 +18,30 @@ instance.interceptors.request.use(
 );
 
 
-export function cadastrar(aluno) {
-    return new Promise((resolve) => {
-        instance
-            .post('/alunos', {
-                nome: aluno.nome,
-                sobrenome: aluno.sobrenome,
-                email: aluno.email,
-                celular: aluno.celular,
-                cpf: aluno.cpf,
-                dataDeNascimento: aluno.dataDeNascimento,
-                genero: aluno.genero,
-                inicioDeMatricula: aluno.inicioDeMatricula,
-                academiaId: 1
-            }).then((response) => {
-                if (response.status == 201) {
-                    resolve(1)
-                }
-            });
-    })
+export async function post(aluno) {
+    const response = await api.post('./alunos', {
+        nome: aluno.nome,
+        sobrenome: aluno.sobrenome,
+        email: aluno.email,
+        celular: aluno.celular,
+        cpf: aluno.cpf,
+        dataDeNascimento: aluno.dataDeNascimento,
+        genero: aluno.genero,
+        inicioDeMatricula: aluno.inicioDeMatricula,
+        academiaId: 1
+    });
+
+    return response.data;
 }
 
 export async function getAll() {
-    const response = await instance.get('/alunos');
+    const response = await api.get('/alunos');
     return response.data;
 }
 
 export async function getById(id) {
     console.log('oi')
-    const response = await instance.get(`/alunos/${id}`);
+    const response = await api.get(`/alunos/${id}`);
     console.log(response.data);
     return response.data;
 }
@@ -57,15 +50,15 @@ export async function updated(id, aluno) {
     delete aluno.id
     console.log(aluno)
     console.log(id)
-    const response = await instance.put(`/alunos/${id}`, aluno)
+    const response = await api.put(`/alunos/${id}`, aluno)
     return response.data;
 }
 
-export function remover(id) {
+export function deleteById(id) {
     console.log(id);
     return new Promise(resolve => {
         console.log(id);
-        instance.delete(`/alunos/${id}`).then((response) => {
+        api.delete(`/alunos/${id}`).then((response) => {
             if (response.status == 200) {
                 resolve(1);
             }

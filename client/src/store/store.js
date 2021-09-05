@@ -11,6 +11,11 @@ const store = new Vuex.Store({
       changeAluno(state, payload) {
         state.aluno = { ...payload }
       }
+    },
+    actions: {
+      changeAluno (context, payload) {
+        context.commit('changeAluno', payload)
+      }
     }
 })
 
