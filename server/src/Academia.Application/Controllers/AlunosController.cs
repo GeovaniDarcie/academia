@@ -100,6 +100,7 @@ namespace Academia.Application.Controllers
                 var aluno = new Aluno(inputDTO.Nome, inputDTO.Sobrenome, inputDTO.Email, inputDTO.Celular,
                     inputDTO.Cpf,  inputDTO.DataDeNascimento, inputDTO.Genero, inputDTO.InicioDeMatricula, inputDTO.AcademiaId);
                 aluno.Id = id;
+        
                 var result = await _service.Put(aluno);
                 if (result != null)
                 {

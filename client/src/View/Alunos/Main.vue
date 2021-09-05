@@ -59,7 +59,6 @@
         class="my-0"
       ></b-pagination>
     </b-col>
-    <p>{{ aluno }}</p>
   </div>
 </template>
 
@@ -137,14 +136,18 @@ export default {
 
     async deletarAluno(aluno) {
       const deletado = await deleteById(aluno.id);
+      
       if (deletado) {
-        // this.buscarAluno();
+        this.alunos = await getAll();
       }
+      
     },
 
     async handleOk() {
       if(this.editAluno) {
-        updated(this.aluno)
+        const aluno = await updated(this.aluno.id, this.aluno);
+        const index = this.alunos.findIndex(a => a.id === aluno.id);
+        this.$set(this.alunos, index, aluno);
       } else {
         const aluno = await post(this.aluno)
         this.alunos.push(aluno);

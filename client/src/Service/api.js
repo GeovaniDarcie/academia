@@ -48,22 +48,14 @@ export async function getById(id) {
 
 export async function updated(id, aluno) {
     delete aluno.id
-    console.log(aluno)
-    console.log(id)
     const response = await api.put(`/alunos/${id}`, aluno)
     return response.data;
 }
 
-export function deleteById(id) {
-    console.log(id);
-    return new Promise(resolve => {
-        console.log(id);
-        api.delete(`/alunos/${id}`).then((response) => {
-            if (response.status == 200) {
-                resolve(1);
-            }
-        })
-    })
+export async function deleteById(id) {
+    const response = await api.delete(`/alunos/${id}`);
+
+    return response.data;
 }
 
 export async function login(username, password) {
