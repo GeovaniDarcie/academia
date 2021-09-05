@@ -16,6 +16,8 @@ namespace Academia.CrossCutting.DependencyInjection
             serviceCollection.AddTransient<IAnamneseService, AnamneseService>();
             serviceCollection.AddTransient<IAntropometriaService, AntropometriaService>();
             serviceCollection.AddTransient<IDobrasCutaneasService, DobrasCutaneasService>();
+            serviceCollection.AddTransient<ITreinoService, TreinoService>();
+            serviceCollection.AddTransient<IAtividadeService, AtividadeService>();
         }
     }
 }

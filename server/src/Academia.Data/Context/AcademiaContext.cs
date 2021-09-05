@@ -27,5 +27,8 @@ namespace Academia.Data.Context
         public DbSet<Anamnese> Anamneses { get; set; }
         public DbSet<Antropometria> Antropometrias { get; set; }
         public DbSet<DobrasCutaneas> DobrasCutaneas { get; set; }
+
+        public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<Treino> Treinos { get; set; }
     }
 }
