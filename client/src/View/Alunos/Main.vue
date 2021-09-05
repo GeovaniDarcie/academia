@@ -12,13 +12,25 @@
       </b-button
       >
     </div>
-    <ModalCadastro
-      :editAluno="edit"
-      :idAluno="idAluno"
-      :mostrarModal="show"
-      @mudaValorModal="mudaModal"
-      @buscarAluno="buscarAluno"
-    />
+
+    <b-modal
+      v-model="showModal"
+      :title="this.editAluno ? 'Editar aluno' : 'Cadastrar aluno'"
+      :header-bg-variant="backgroundModal"
+      :header-text-variant="textModal"
+      :footer-bg-variant="backgroundModal"
+      :footer-text-variant="textModal"
+      class="modal"
+      @ok="handleOk"
+    >
+      <ModalCadastro
+        :aluno="aluno"
+        :idAluno="idAluno"
+        :mostrarModal="show"
+        @mudaValorModal="mudaModal"
+        @buscarAluno="buscarAluno"
+      />
+    </b-modal>  
     <b-table
       id="table-transition-example"
       :table-variant="'dark'"
@@ -60,10 +72,12 @@
         class="my-0"
       ></b-pagination>
     </b-col>
+    <p>{{ aluno }}</p>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations  } from 'vuex';
 import ModalCadastro from "../../Components/ModalCadastro";
 import { getAll, remover } from "../../Service/SalvarDados.js";
 
@@ -78,6 +92,10 @@ export default {
       show: false,
       edit: false,
       idAluno: 0,
+      showModal: false,
+      backgroundModal: "dark",
+      editAluno: false,
+      textModal: "light",
       transProps: {
         name: "flip-list",
       },
@@ -106,9 +124,12 @@ export default {
     items() {
       return this.alunos;
     },
+    ...mapState(['aluno'])
   },
 
   methods: {
+    ...mapMutations(['changeAluno']),
+  
     onRowSelected(items) {
       this.selected = items;
     },
@@ -126,10 +147,9 @@ export default {
     },
 
     async editarAluno(aluno) {
-      console.log(aluno.id)
-      this.edit = true;
-      this.mudaModal(true);
-      this.idAluno = aluno.id;
+      this.editAluno = true;
+      this.showModal = true;
+      this.changeAluno(aluno);
     },
 
     async deletarAluno(aluno) {
@@ -138,6 +158,10 @@ export default {
         this.buscarAluno();
       }
     },
+
+    handleOk() {
+      console.log('oi')
+    }
   },
 };
 </script>
