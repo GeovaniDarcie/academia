@@ -69,64 +69,21 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getById } from "../Service/api";
 
 export default {
   name: "ModalCadastro",
-  props: {
-    mostrarModal: Boolean,
-    editAluno: Boolean,
-  },
-
   data() {
     return {
       backgroundModal: "dark",
       textModal: "light",
-      /* aluno: {
-        nome: "",
-        sobrenome: "",
-        email: "",
-        celular: "",
-        cpf: "",
-        dataDeNascimento: "",
-        genero: "",
-        inicioDeMatricula: "",
-      }, */
       options: [
         { item: "A", name: "Masculino" },
         { item: "B", name: "Feminino" },
       ],
     };
   },
-  methods: {
-    limpaCamposAlunos() {
-      this.aluno = {};
-    },
-
-    handleOk() {
-      console.log('oitro')
-    },
-
-    async buscarPorId(id) {
-      console.log("aa");
-      const alunoDb = await getById(id);
-      this.aluno = { ...alunoDb };
-      this.aluno.dataDeNascimento = new Date(this.aluno.dataDeNascimento)
-        .toISOString()
-        .split("T")[0];
-      this.aluno.inicioDeMatricula = new Date(this.aluno.inicioDeMatricula)
-        .toISOString()
-        .split("T")[0];
-    },
-  },
   computed: {
     ...mapState(['aluno']),
-  },
-
-  watch: {
-    idAluno() {
-      this.buscarPorId(this.idAluno);
-    },
   },
 };
 </script>
