@@ -17,7 +17,7 @@
           <nav  class="mb-3">
             <b-nav vertical>
               <b-nav-item href="/avaliacao" @click="hide">Avaliação Física</b-nav-item>
-              <b-nav-item href="/teste" @click="hide">teste</b-nav-item>
+              <b-nav-item href="/treino" @click="hide">Treinos</b-nav-item>
             </b-nav>
           </nav>
         </div>

@@ -21,9 +21,7 @@
       <template #modal-footer="{ ok, cancel }">
         <b>Academia</b>
         <b-button variant="success" @click="ok()"> Salvar </b-button>
-        <b-button variant="danger" @click="cancel()">
-          Cancelar
-        </b-button>
+        <b-button variant="danger" @click="cancel()"> Cancelar </b-button>
       </template>
     </b-modal>
 
@@ -40,6 +38,13 @@
       :tbody-transition-props="transProps"
     >
       <template #cell(opcoes)="row">
+        <b-dropdown class="mr-1 menu-suspenso" size="sm" no-caret>
+          <template #button-content>
+            <b-icon icon="arrow-down-circle-fill"></b-icon>
+          </template>
+          <b-dropdown-item :to="{ name: 'avaliacao', params: { aluno: row.item }}">Avaliação Física</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'treino', params: { aluno: row.item }}">Treinos</b-dropdown-item>
+        </b-dropdown>
         <b-button size="sm" @click="editarAluno(row.item)" class="mr-1">
           <b-icon icon="pencil-square"></b-icon>
         </b-button>
@@ -136,20 +141,19 @@ export default {
 
     async deletarAluno(aluno) {
       const deletado = await deleteById(aluno.id);
-      
+
       if (deletado) {
         this.alunos = await getAll();
       }
-      
     },
 
     async handleOk() {
-      if(this.editAluno) {
+      if (this.editAluno) {
         const aluno = await updated(this.aluno.id, this.aluno);
-        const index = this.alunos.findIndex(a => a.id === aluno.id);
+        const index = this.alunos.findIndex((a) => a.id === aluno.id);
         this.$set(this.alunos, index, aluno);
       } else {
-        const aluno = await post(this.aluno)
+        const aluno = await post(this.aluno);
         this.alunos.push(aluno);
       }
     },
@@ -170,4 +174,11 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
+
+/* .menu-suspenso{
+  width: 31;
+  height: 35.5;
+  margin: 0px 4px 0px 0px;
+  padding: 4px 8px;
+} */
 </style>

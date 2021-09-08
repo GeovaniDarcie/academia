@@ -5,16 +5,30 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-      aluno: {}
+      aluno: {},
+      autenticado: false,
+      loading: false,
     },
     mutations: {
       changeAluno(state, payload) {
         state.aluno = { ...payload }
+      },
+      alunoAutorizado(state, payload) {
+        state.autenticado = payload;
+      },
+      iniciaLoading(state, payload) {
+        state.loading = payload;
       }
     },
     actions: {
       changeAluno (context, payload) {
         context.commit('changeAluno', payload)
+      },
+      alunoAutorizado (context, payload) {
+        context.commit('alunoAutorizado', payload)
+      },
+      iniciaLoading (context, payload) {
+        context.commit('alunoAutorizado', payload)
       }
     }
 })
