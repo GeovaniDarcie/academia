@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Academia.Data.Context;
 using Academia.Domain.Entities;
@@ -25,6 +26,23 @@ namespace Academia.Service.Services
         public async Task<Treino> Get(long id)
         {
             return await _repository.SelectAsync(id);
+        }
+
+        public async Task<Treino> Get(long id, long alunoId)
+        {
+            var query = await _context.Treinos.Include(i => i.Atividades).ToListAsync();
+            Treino treinoDb = null;
+
+            query.ForEach(treino => {
+                if (treino.AlunoId == alunoId && treino.Id == id) {
+                    treinoDb = treino;
+                    treino.Atividades.ForEach(atividade => {
+                       treinoDb.Atividades.Add(atividade);
+                    });
+                }
+            });
+
+             return treinoDb;       
         }
 
         public async Task<IEnumerable<Treino>> GetAll()

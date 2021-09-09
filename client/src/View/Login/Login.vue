@@ -1,12 +1,13 @@
 <template>
         <div class="containar login bg-dark" style="opacity: 0.9">
-                <label v-show="!loading" for="" style="margin-top: 55px">Username: </label>
-                <input v-show="!loading" style="border-radius: 10px" v-model="username" type="text">
+                <template v-if="!loading">
+                    <label for="" style="margin-top: 55px">Usuário: </label>
+                    <input style="border-radius: 10px" v-model="username" type="text">
 
-                <label v-show="!loading" for="" style="margin-top: 5px">Password: </label>
-                <input v-show="!loading" style="border-radius: 10px" v-model="password" type="password">
-
-                <b-button v-show="!loading" @click="logar" style="margin-top: 50px">Entrar</b-button>
+                    <label for="" style="margin-top: 5px">Senha: </label>
+                    <input style="border-radius: 10px" v-model="password" type="password">
+                    <b-button @click="logar" style="margin-top: 50px">Entrar</b-button>
+                </template>
                 <vue-loading v-show="loading" type="spin" color="#d9544e" :size="{ width: '50px', height: '50px' }"></vue-loading>    
         </div>
 </template>

@@ -75,3 +75,28 @@ export async function login(username, password) {
     return true;
 }
 
+export async function criarTreino (dia) {
+    try {
+        const response = await api.post('/treino', {Dia: dia});
+        return response.data;
+    } catch (e) {
+        console.log('Treino inválido')
+    }
+}
+
+export async function criarAtividade (atividade) {
+    try {
+        const response = await api.post('/atividade', {
+            descricao: atividade.descricao,
+            series: atividade.series,
+            repeticoes: atividade.repeticoes,
+            treinoId: atividade.treinoId,
+            alunoId: atividade.alunoId
+        });
+
+        return response.data;
+    } catch (e) {
+        console.log('Atividade inválida')
+    }
+}
+

@@ -27,14 +27,14 @@
 
     <b-table
       :table-variant="'dark'"
-      :items="items"
+      :items="alunos"
       :fields="fields"
       primary-key="a"
       hover
       fixed
       selectable
       :select-mode="'single'"
-      :current-page="currentPage"
+      :current-page="0"
       :tbody-transition-props="transProps"
     >
       <template #cell(opcoes)="row">
@@ -99,17 +99,21 @@ export default {
         { key: "opcoes", label: "Opções" },
       ],
       currentPage: 1,
-      totalRows: 1,
-      perPage: 5,
+      totalRows: 20,
+      perPage: 10,
     };
   },
 
-  async created() {
-    this.alunos = await getAll();
+  mounted() {
+    this.buscaAlunos();
   },
 
-  mounted() {
-    this.totalRows = this.items.length;
+  watch: {
+    currentPage: {
+      handler() {
+        this.buscaAlunos();
+      }
+    }
   },
 
   computed: {
@@ -122,6 +126,10 @@ export default {
 
   methods: {
     ...mapActions(["changeAluno"]),
+    
+    async buscaAlunos() {
+      this.alunos = await getAll();
+    },
 
     novoAluno() {
       // limpa a store (state aluno)

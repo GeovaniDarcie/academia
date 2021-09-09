@@ -16,8 +16,9 @@
           <h4>Menu</h4>
           <nav  class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/avaliacao" @click="hide">Avaliação Física</b-nav-item>
-              <b-nav-item href="/treino" @click="hide">Treinos</b-nav-item>
+              <b-nav-item :to="{ name: 'alunos' }" @click="hide">Alunos</b-nav-item>
+              <b-nav-item :to="{ name: 'avaliacao' }" @click="hide">Avaliação Física</b-nav-item>
+              <b-nav-item :to="{ name: 'treino' }" @click="hide">Treinos</b-nav-item>
             </b-nav>
           </nav>
         </div>

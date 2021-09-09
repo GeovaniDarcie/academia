@@ -55,6 +55,26 @@ namespace Academia.Application.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{treinoId}/{alunoId}")]
+        public async Task<IActionResult> Get(long treinoId, long alunoId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                return Ok(await _service.Get(treinoId, alunoId));
+            }
+            catch (ArgumentException e)
+            {
+
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TreinoInputDTO inputDTO)
         {
@@ -66,7 +86,8 @@ namespace Academia.Application.Controllers
             try
             {
                 var treino = new Treino(
-                    inputDTO.Dia
+                    inputDTO.Dia,
+                    inputDTO.AlunoId
                 );
                 var result = await _service.Post(treino);
 
@@ -97,7 +118,8 @@ namespace Academia.Application.Controllers
             try
             {
                 var treino = new Treino(
-                    inputDTO.Dia
+                    inputDTO.Dia,
+                    inputDTO.AlunoId
                 );
                 treino.Id = id;
                 var result = await _service.Put(treino);

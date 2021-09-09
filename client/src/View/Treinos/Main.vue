@@ -1,269 +1,180 @@
 <template>
-  <div class="treino bg-dark">
-    <div class="quadrado" style="font-size: 1rem">
-      Treino para <b>{{ nomeCompleto }}</b>
-    </div>
-    <div id="flashcard-app" class="container">
-      <h1>Flashcard App!</h1>
-
-      <div class="flashcard-form">
-        <label for="front"
-          >Front
-          <input v-model="newFront" type="text" id="front" />
-        </label>
-        <label for="back"
-          >Back
-          <input
-            v-on:keypress.enter="addNew"
-            v-model="newBack"
-            type="text"
-            id="back"
-          />
-        </label>
-        <button v-on:click="addNew">Add a New Card</button>
-        <span v-show="error" class="error"
-          >Oops! Flashcards need a front and a back.</span
-        >
+  <div class="treino-container">
+    <div class="treino bg-dark" style="opacity: 0.9;">
+      <div>
+        <h2 class="ml-3 titulo-treino font-treino">Treino</h2>
       </div>
-
-      <ul class="flashcard-list">
-        <li
-          v-on:click="toggleCard(card)"
-          :key="index"
-          v-for="(card, index) in cards"
-        >
-          <transition name="flip">
-            <p v-bind:key="card.flipped" class="card">
-              {{ card.flipped ? card.back : card.front }}
-              <span v-on:click="cards.splice(index, 1)" class="delete-card"
-                >X</span
-              >
-            </p>
-          </transition>
-        </li>
-      </ul>
+      <hr class="mt-2" style="border: 1px solid white" />
+      <b-row class="mb-1 ml-3">
+        <b-col>
+          Dia da semana:
+          <b-form-select 
+            @change="onChange()" placeholder="Nome"
+            :options="options"
+            v-model="selected"
+          >
+          </b-form-select>
+        </b-col>
+        <b-col>
+          Treino:
+          <b-form-input
+            placeholder="Treino"
+            v-model="descricao"
+            :disabled="!selected"
+          ></b-form-input>
+        </b-col>
+        <b-col>
+          Séries:
+          <b-form-input
+            type="number"
+            placeholder="Séries"
+            v-model="series"
+            :disabled="!selected"
+          ></b-form-input>
+        </b-col>
+        <b-col>
+          Repetições:
+          <b-form-input
+            type="number"
+            placeholder="Repetições"
+            v-model="repeticoes"
+            :disabled="!selected"
+          ></b-form-input>
+        </b-col>
+        <b-button class="adicionar" @click="adicionar()">Adicionar</b-button>
+      </b-row> 
+      <table class="table atividades mt-4">
+        <tr>
+          <th>Treino</th>
+          <th>Séries</th>
+          <th>Repetições</th>
+        </tr>
+        <tr v-for="a in atividades" :key="a.descricao">
+          <td>
+            {{ a.descricao }}
+          </td>
+          <td>
+            {{ a.series }}
+          </td>
+          <td>
+            {{ a.repeticoes }}
+          </td>
+        </tr>
+      </table>
+      <h5 class="mr-3 final">
+            <span class="font-treino">Aluno: </span>
+            <b class="text-info">{{ nomeCompleto }}</b>
+      </h5>
     </div>
   </div>
 </template>
 
 <script>
+import { criarTreino, criarAtividade } from "../../Service/api";
+
 export default {
+  data() {
+    return {
+      treinoId: 0,
+      descricao: "",
+      series: 0,
+      repeticoes: 0,
+      atividades: [],
+      options: [
+        { value: 0, text: "Não informado" },
+        { value: 1, text: "Domingo" },
+        { value: 2, text: "Segunda-feira" },
+        { value: 3, text: "Terça-feira" },
+        { value: 4, text: "Quarta-feira" },
+        { value: 5, text: "Quinta-feira" },
+        { value: 6, text: "Sexta-feira" },
+        { value: 7, text: "Sábado" },
+      ],
+      selected: null,
+    };
+  },
   computed: {
     nomeCompleto() {
-      const { nome, sobrenome } = this.$route.params.aluno;
-      return `${nome} ${sobrenome}`;
+      return `${this.$route.params.aluno.nome} ${this.$route.params.aluno.sobrenome}`;
     },
-  },
-
-  data(){
-      return {
-          cards: [ 
-                {
-                front: 'Segunda',
-                back: 'Ada Lovelace',
-                flipped: false,
-                },
-                {
-                front: 'Terça',
-                back: 'Edith Clarke',
-                flipped: false,
-            
-                },
-                {
-                front: 'Quarta',
-                back: 'Alan Turing',
-                flipped: false,
-                },
-                {
-                front: 'Quinta',
-                back: 'Dr. Evelyn Boyd Granville',
-                flipped: false,
-                },
-                {
-                front: 'Sexta',
-                back: 'Dr. Evelyn Boyd Granville',
-                flipped: false,
-                },
-        ],    
-        newFront: '',
-        newBack: '',
-        error: false
-    }   
+    alunoId() {
+      return this.$route.params.aluno.id
+    }
   },
   methods: {
-    toggleCard: function(card) {
-      card.flipped = !card.flipped;
-    },
-    addNew: function() {
-      if(!this.newFront || !this.newBack) {
-        this.error = true;
-      } else {
-        this.cards.push({
-          front: this.newFront,
-          back: this.newBack,
-          flipped: false
-        });
-        // set the field empty
-        this.newFront = '';
-        this.newBack = '';
-        // Make the warning go away
-        this.error= false;
+    async onChange() {
+      console.log(this.selected)
+      if (this.selected) {
+        const data = await criarTreino(this.selected);
+        this.treinoId = data.id;
       }
-    }
-  } 
-}
+    },
+
+    async adicionar() {
+      const atividade = {
+        descricao: this.descricao,
+        series: this.series,
+        repeticoes: this.repeticoes,
+      }
+  
+      this.atividades.push(atividade);
+
+      const response = await criarAtividade({
+        ...atividade, 
+        treinoId: this.treinoId,
+        alunoId: this.alunoId
+      });
+
+      console.log(response);
+
+      this.descricao = "";
+      this.series = "";
+      this.repeticoes = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
-.treino {
-  margin: 0 auto;
-  margin-top: 120px;
-  color: white;
-  width: 90vw;
-  height: 100vh;
-  border-radius: 45px;
-  text-align: center;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-}
-
-ul {
-  padding-left: 0;
+.treino-container {
   display: flex;
-  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  color: white;
 }
-
-li {
-  list-style-type: none;
-  padding: 10px 10px;
-  transition: all 0.3s ease;
-}
-
-.container {
-  max-width: 100%;
-  padding: 2em;
-}
-
-.card {
-  display: block;
-  width: 200px;
-  height: 305px;
-  padding: 80px 50px;
-  background-color: #51aae5;
-  border-radius: 7px;
-  margin: 5px;
-  text-align: center;
-  line-height: 27px;
-  cursor: pointer;
+.treino {
   position: relative;
-  color: #fff;
-  font-weight: 600;
-  font-size: 20px;
-  -webkit-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  -moz-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  will-change: transform;
+  margin-top: 90px;
+  width: 1000px;
+  height: 510px;
 }
 
-li:hover {
-  transform: scale(1.1);
+.atividades {
+  color: white;
 }
 
-li:nth-child(-n + 3) .card {
-  background-color: #e65f51;
+.titulo-treino {
+  font-size: 3rem;
+  display: inline;
 }
 
-li:nth-child(2n + 1) .card {
-  background-color: #a17de9;
+.font-treino {
+  font-family: "Text Me One", sans-serif;
 }
 
-li:nth-child(4n) .card {
-  background-color: #feca34;
+.adicionar{
+  width: 90px;
+  height: 40px;
+  margin-right: 50px;
+  margin-top: 20px;
 }
 
-li:nth-child(5n-2) .card {
-  background-color: #51aae5;
-}
-
-li:nth-child(4n + 4) .card {
-  background-color: #feca34;
-}
-
-li:nth-child(-7n + 7) .card {
-  background-color: #e46055;
-}
-
-.delete-card {
+.final {
   position: absolute;
+  bottom: 0;
   right: 0;
-  top: 0;
-  padding: 10px 15px;
-  opacity: 0.4;
-  transition: all 0.5s ease;
 }
 
-.delete-card:hover,
-.error {
-  opacity: 1;
-  transform: rotate(360deg);
-}
-
-.flip-enter-active {
-  transition: all 0.4s ease;
-}
-
-.flip-leave-active {
-  display: none;
-}
-
-.flip-enter,
-.flip-leave {
-  transform: rotateY(180deg);
-  opacity: 0;
-}
-
-/* Form */
-.flashcard-form {
-  position: relative;
-}
-
-label {
-  font-weight: 400;
-  color: #333;
-  margin-right: 10px;
-}
-
-input {
-  border-radius: 5px;
-  border: 2px solid #eaeaea;
-  padding: 10px;
-  outline: none;
-}
-
-button {
-  border-radius: 5px;
-  border: 1px solid #87cb84;
-  background-color: #87cb84;
-  padding: 8px 15px;
-  outline: none;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: #70a66f;
-}
-
-.error {
-  margin-top: 10px;
-  display: block;
-  color: #e44e42;
-  font-weight: 600;
-}
 </style>

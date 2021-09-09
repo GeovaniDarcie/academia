@@ -8,10 +8,13 @@ namespace Academia.Domain.Entities
     {
        public Dia Dia { get; set; }
        public List<Atividade> Atividades { get; set; }
+
+       public long AlunoId { get; set; }
      
-        public Treino(Dia dia)
+        public Treino(Dia dia, long alunoId)
         {
             Dia = dia;
+            AlunoId = alunoId; 
             Atividades = new List<Atividade>();
         }
 

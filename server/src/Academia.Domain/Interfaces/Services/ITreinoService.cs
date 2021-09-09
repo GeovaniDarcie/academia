@@ -8,6 +8,7 @@ namespace Academia.Domain.Interfaces.Services
     public interface ITreinoService
     {
         Task<Treino> Get(long id);
+        Task<Treino> Get(long id, long alunoId);
         Task<IEnumerable<Treino>> GetAll();
         Task<Treino> Post(Treino treino);
 
