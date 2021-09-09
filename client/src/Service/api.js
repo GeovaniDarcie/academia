@@ -35,8 +35,15 @@ export async function post(aluno) {
     return response.data;
 }
 
-export async function getAll() {
-    const response = await api.get('/alunos');
+export async function getAll(limit, page) {
+    console.log(page)
+    const response = await api.get('/alunos', {
+        params: {
+            limit: limit,
+            page: page
+        }
+    })
+
     return response.data;
 }
 

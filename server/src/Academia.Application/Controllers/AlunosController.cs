@@ -6,6 +6,7 @@ using Academia.Domain.Interfaces.Services.Alunos;
 using Microsoft.AspNetCore.Mvc;
 using Academia.Domain.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading;
 
 namespace Academia.Application.Controllers
 {
@@ -20,7 +21,7 @@ namespace Academia.Application.Controllers
             _service = service;
         }
         [HttpGet]
-        public async Task<ActionResult> GetAll([FromServices] IAlunoService service)
+        public async Task<ActionResult> GetAll(CancellationToken cancellationToken, int limit = 5, int page = 1)
         {
             if (!ModelState.IsValid)
             {
@@ -29,7 +30,7 @@ namespace Academia.Application.Controllers
 
             try
             {
-                return Ok(await _service.GetAll());
+                return Ok(await _service.GetByPageAsync(limit, page, cancellationToken));
             }
             catch (ArgumentException e)
             {

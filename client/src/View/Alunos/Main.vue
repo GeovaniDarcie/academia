@@ -99,8 +99,8 @@ export default {
         { key: "opcoes", label: "Opções" },
       ],
       currentPage: 1,
-      totalRows: 20,
-      perPage: 10,
+      totalRows: 0,
+      perPage: 5,
     };
   },
 
@@ -111,6 +111,7 @@ export default {
   watch: {
     currentPage: {
       handler() {
+        console.log(this.currentPage)
         this.buscaAlunos();
       }
     }
@@ -128,7 +129,9 @@ export default {
     ...mapActions(["changeAluno"]),
     
     async buscaAlunos() {
-      this.alunos = await getAll();
+      const response = await getAll(this.perPage, this.currentPage);
+      this.totalRows = response.totalItems
+      this.alunos = response.items;
     },
 
     novoAluno() {
@@ -151,7 +154,8 @@ export default {
       const deletado = await deleteById(aluno.id);
 
       if (deletado) {
-        this.alunos = await getAll();
+        const response = await getAll(this.perPage, this.currentPage);
+        this.alunos = response.items;
       }
     },
 
