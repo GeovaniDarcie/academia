@@ -41,6 +41,7 @@ namespace Academia.Service.Services
                                     .Where(x => (long)x.Dia == dia && x.AlunoId == alunoId)
                                     .Include(treino => treino.Atividades)
                                     .FirstOrDefaultAsync();
+
             }
 
         }

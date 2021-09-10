@@ -49,7 +49,7 @@
           <th>Séries</th>
           <th>Repetições</th>
         </tr>
-        <tr v-for="a in atividades" :key="a.descricao">
+        <tr v-for="(a, i) in atividades" :key="i">
           <td>
             {{ a.descricao }}
           </td>
@@ -105,9 +105,13 @@ export default {
     async onChange() {
       if (this.selected) {
         const response = await buscarTreinos(this.selected, this.alunoId);
-        console.log(response);
-        const data = await criarTreino(this.selected);
-        this.treinoId = data.id;
+        this.atividades = response.atividades;
+
+        if (!this.atividades) {
+          this.atividades = [];
+          const data = await criarTreino(this.selected, this.alunoId);
+          this.treinoId = data.id;
+        } 
       }
     },
 
@@ -117,13 +121,12 @@ export default {
         series: this.series,
         repeticoes: this.repeticoes,
       }
-  
+      
       this.atividades.push(atividade);
 
       await criarAtividade({
         ...atividade, 
         treinoId: this.treinoId,
-        alunoId: this.alunoId
       });
 
       this.descricao = "";

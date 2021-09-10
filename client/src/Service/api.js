@@ -79,9 +79,13 @@ export async function login(username, password) {
     return true;
 }
 
-export async function criarTreino (dia) {
+export async function criarTreino (dia, alunoId) {
     try {
-        const response = await api.post('/treino', {Dia: dia});
+        const response = await api.post('/treino', {
+            Dia: dia,
+            alunoId: alunoId
+        });
+
         return response.data;
     } catch (e) {
         console.log('Treino inválido')
@@ -95,7 +99,6 @@ export async function criarAtividade (atividade) {
             series: atividade.series,
             repeticoes: atividade.repeticoes,
             treinoId: atividade.treinoId,
-            alunoId: atividade.alunoId
         });
 
         return response.data;
