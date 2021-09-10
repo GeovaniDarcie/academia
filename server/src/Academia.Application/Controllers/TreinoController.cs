@@ -56,8 +56,8 @@ namespace Academia.Application.Controllers
         }
 
         [HttpGet]
-        [Route("{treinoId}/{alunoId}")]
-        public async Task<IActionResult> Get(long treinoId, long alunoId)
+        [Route("atividades")]
+        public async Task<IActionResult> Get(long? treinoId, long? dia, long alunoId)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Academia.Application.Controllers
 
             try
             {
-                return Ok(await _service.Get(treinoId, alunoId));
+                return Ok(await _service.Get(treinoId, dia, alunoId));
             }
             catch (ArgumentException e)
             {

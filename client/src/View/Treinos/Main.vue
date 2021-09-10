@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { criarTreino, criarAtividade } from "../../Service/api";
+import { criarTreino, criarAtividade, buscarTreinos } from "../../Service/api";
 
 export default {
   data() {
@@ -99,12 +99,13 @@ export default {
     },
     alunoId() {
       return this.$route.params.aluno.id
-    }
+    },
   },
   methods: {
     async onChange() {
-      console.log(this.selected)
       if (this.selected) {
+        const response = await buscarTreinos(this.selected, this.alunoId);
+        console.log(response);
         const data = await criarTreino(this.selected);
         this.treinoId = data.id;
       }
@@ -119,13 +120,11 @@ export default {
   
       this.atividades.push(atividade);
 
-      const response = await criarAtividade({
+      await criarAtividade({
         ...atividade, 
         treinoId: this.treinoId,
         alunoId: this.alunoId
       });
-
-      console.log(response);
 
       this.descricao = "";
       this.series = "";

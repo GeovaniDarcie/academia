@@ -36,7 +36,6 @@ export async function post(aluno) {
 }
 
 export async function getAll(limit, page) {
-    console.log(page)
     const response = await api.get('/alunos', {
         params: {
             limit: limit,
@@ -48,9 +47,7 @@ export async function getAll(limit, page) {
 }
 
 export async function getById(id) {
-    console.log('oi')
     const response = await api.get(`/alunos/${id}`);
-    console.log(response.data);
     return response.data;
 }
 
@@ -102,8 +99,24 @@ export async function criarAtividade (atividade) {
         });
 
         return response.data;
+
     } catch (e) {
         console.log('Atividade inválida')
+    }
+}
+
+export async function buscarTreinos(dia, id ) {
+    try {
+        const response = await api.get('/treino/atividades', {
+            params: {
+                dia: dia,
+                alunoId: id
+            }
+        })
+
+        return response.data;
+    } catch (e) {
+        console.log(e);
     }
 }
 

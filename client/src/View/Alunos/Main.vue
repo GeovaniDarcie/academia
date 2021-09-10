@@ -111,7 +111,6 @@ export default {
   watch: {
     currentPage: {
       handler() {
-        console.log(this.currentPage)
         this.buscaAlunos();
       }
     }

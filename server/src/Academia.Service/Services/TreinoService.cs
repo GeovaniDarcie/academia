@@ -13,6 +13,7 @@ namespace Academia.Service.Services
     {
         private IRepository<Treino> _repository;
         private readonly AcademiaContext _context;
+
         public TreinoService(IRepository<Treino> repository, AcademiaContext context)
         {
             _repository = repository;
@@ -28,21 +29,20 @@ namespace Academia.Service.Services
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Treino> Get(long id, long alunoId)
+        public async Task<Treino> Get(long? id, long? dia, long alunoId)
         {
-            var query = await _context.Treinos.Include(i => i.Atividades).ToListAsync();
-            Treino treinoDb = null;
+            if (id != null) {
+                return await _context.Treinos
+                                    .Where(x => x.Id == id && x.AlunoId == alunoId)
+                                    .Include(treino => treino.Atividades)
+                                    .FirstOrDefaultAsync();
+            } else {
+                return await _context.Treinos
+                                    .Where(x => (long)x.Dia == dia && x.AlunoId == alunoId)
+                                    .Include(treino => treino.Atividades)
+                                    .FirstOrDefaultAsync();
+            }
 
-            query.ForEach(treino => {
-                if (treino.AlunoId == alunoId && treino.Id == id) {
-                    treinoDb = treino;
-                    treino.Atividades.ForEach(atividade => {
-                       treinoDb.Atividades.Add(atividade);
-                    });
-                }
-            });
-
-             return treinoDb;       
         }
 
         public async Task<IEnumerable<Treino>> GetAll()
