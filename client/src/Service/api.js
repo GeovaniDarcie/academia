@@ -20,19 +20,26 @@ api.interceptors.request.use(
 
 
 export async function post(aluno) {
-    const response = await api.post('./alunos', {
-        nome: aluno.nome,
-        sobrenome: aluno.sobrenome,
-        email: aluno.email,
-        celular: aluno.celular,
-        cpf: aluno.cpf,
-        dataDeNascimento: aluno.dataDeNascimento,
-        genero: aluno.genero,
-        inicioDeMatricula: aluno.inicioDeMatricula,
-        academiaId: 1
-    });
+    try {   
+        const response = await api.post('./alunos', {
+            nome: aluno.nome,
+            sobrenome: aluno.sobrenome,
+            email: aluno.email,
+            celular: aluno.celular,
+            cpf: aluno.cpf,
+            dataDeNascimento: aluno.dataDeNascimento,
+            genero: aluno.genero,
+            inicioDeMatricula: aluno.inicioDeMatricula,
+            academiaId: 1
+        });
 
-    return response.data;
+        return response.data;
+
+    } catch(err)
+    {
+        store.state.errors = err.response.data.errors;
+    }
+    
 }
 
 export async function getAll(limit, page) {

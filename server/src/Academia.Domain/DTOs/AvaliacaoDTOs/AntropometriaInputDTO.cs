@@ -1,4 +1,5 @@
 using Academia.Domain.Entities.Enums;
+using FluentValidation;
 
 namespace Academia.Domain.Entities
 {
@@ -9,5 +10,13 @@ namespace Academia.Domain.Entities
        public int PercentualDeGordura { get; set; }
        public double MassaMuscular { get; set; }
        public long AlunoId { get; set; }
+    }
+
+    public class AntropometriaInputDTOValidator : AbstractValidator<AntropometriaInputDTO>
+    {
+        public AntropometriaInputDTOValidator()
+        {
+            RuleFor(antropometria => antropometria.AlunoId).NotEmpty();
+        }
     }
 }

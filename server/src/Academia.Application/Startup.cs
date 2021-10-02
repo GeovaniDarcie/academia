@@ -18,7 +18,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-
+using FluentValidation.AspNetCore;
+using Academia.Domain.Entities;
+using Academia.Domain.DTOs;
 namespace Academia.Application
 {
     public class Startup
@@ -50,7 +52,14 @@ namespace Academia.Application
                 });
             });
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(options => {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                options.RegisterValidatorsFromAssemblyContaining<AlunoInputDTO>();
+                options.RegisterValidatorsFromAssemblyContaining<ProfessorInputDTO>();
+                options.RegisterValidatorsFromAssemblyContaining<AcademiaInputDTO>();
+                options.RegisterValidatorsFromAssemblyContaining<AnamneseInputDTO>();
+                options.RegisterValidatorsFromAssemblyContaining<AntropometriaInputDTO>();
+            });
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {

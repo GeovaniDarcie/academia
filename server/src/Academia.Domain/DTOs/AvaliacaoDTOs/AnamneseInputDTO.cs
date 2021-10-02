@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Academia.Domain.Entities.Enums;
+using FluentValidation;
 
 namespace Academia.Domain.Entities
 {
@@ -17,5 +18,13 @@ namespace Academia.Domain.Entities
            Cirurgias = cirurgias;
            AlunoId = alunoId;
        }
+    }
+
+    public class AnamneseInputDTOValidator : AbstractValidator<AnamneseInputDTO>
+    {
+        public AnamneseInputDTOValidator()
+        {
+            RuleFor(anamnese => anamnese.AlunoId).NotEmpty();
+        }
     }
 }

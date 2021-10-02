@@ -8,6 +8,7 @@ const store = new Vuex.Store({
       aluno: {},
       autenticado: false,
       loading: false,
+      errors: {}
     },
     mutations: {
       changeAluno(state, payload) {
@@ -18,7 +19,7 @@ const store = new Vuex.Store({
       },
       iniciaLoading(state, payload) {
         state.loading = payload;
-      }
+      },
     },
     actions: {
       changeAluno (context, payload) {
@@ -29,7 +30,7 @@ const store = new Vuex.Store({
       },
       iniciaLoading (context, payload) {
         context.commit('alunoAutorizado', payload)
-      }
+      },
     }
 })
 

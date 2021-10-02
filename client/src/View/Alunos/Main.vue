@@ -1,5 +1,17 @@
 <template>
   <div class="main">
+      <b-alert
+        v-for="(mensagem, index) in mensagensDeErro"
+        :key="index"
+        class="error"
+        :show="dismissCountDown"
+        dismissible
+        variant="danger"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >
+      {{ mensagem }}
+    </b-alert>
     <div class="right">
       <b-button @click="novoAluno" class="ml-2 mr-4 mb-2" variant="dark">
         Cadastrar Aluno
@@ -87,6 +99,9 @@ export default {
       backgroundModal: "dark",
       editAluno: false,
       textModal: "light",
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      mensagensDeErro: [],
       transProps: {
         name: "flip-list",
       },
@@ -121,12 +136,18 @@ export default {
       return this.alunos;
     },
 
-    ...mapState(["aluno"]),
+    ...mapState(["aluno", "errors"]),
   },
 
   methods: {
     ...mapActions(["changeAluno"]),
     
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs
+    },
     async buscaAlunos() {
       const response = await getAll(this.perPage, this.currentPage);
       this.totalRows = response.totalItems
@@ -165,6 +186,15 @@ export default {
         this.$set(this.alunos, index, aluno);
       } else {
         const aluno = await post(this.aluno);
+        
+        if (!aluno) {
+          this.mensagensDeErro = [];
+          Object.entries(this.errors).forEach(([ , value]) => {
+            this.mensagensDeErro.push(value[0])
+          });
+          console.log(this.mensagensDeErro);
+          this.showAlert();
+        }
         this.alunos.push(aluno);
       }
     },
@@ -192,4 +222,14 @@ export default {
   margin: 0px 4px 0px 0px;
   padding: 4px 8px;
 } */
+
+.error {
+  width: 400px; 
+  height: 50px; 
+/*   margin-right: 5px; 
+  position: fixed;
+  z-index: 1050;
+  justify-content: center;
+  align-content: center; */
+}
 </style>

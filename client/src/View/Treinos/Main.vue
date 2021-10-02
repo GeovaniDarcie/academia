@@ -111,7 +111,9 @@ export default {
           this.atividades = [];
           const data = await criarTreino(this.selected, this.alunoId);
           this.treinoId = data.id;
-        } 
+        } else {
+          this.treinoId = this.atividades[0].treinoId;
+        }
       }
     },
 

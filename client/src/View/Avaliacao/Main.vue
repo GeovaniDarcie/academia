@@ -49,11 +49,22 @@
             </b-form-group>
           </div>
           <div class="coluna2">
-            <img width="300px" height="300px" src="../../../corpo.png" alt="" />
+            <template>
+              <model-viewer src="scene.gltf" alt="A 3D model of a car" shadow-intensity="1" camera-controls auto-rotate ar ></model-viewer>
+              <script
+                type="application/javascript" defer
+                src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+              ></script>
+              <script
+               type="application/javascript" defer
+                nomodule
+                src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+              ></script>
+            </template>
           </div>
         </b-tab>
         <b-tab title="Antropometria" class="active table">
-           <div>
+          <div>
             <b-form-group class="input-size">
               Peso:
               <b-form-input
@@ -109,7 +120,7 @@
           </div>
         </b-tab>
         <b-tab title="Dobras Cutâneas" class="active table">
-           <div class="grid">
+          <div class="grid">
             <b-form-group class="input-size mr-2">
               Triciptal:
               <b-form-input
@@ -154,7 +165,7 @@
                 placeholder="Supra Iliaca..."
               ></b-form-input>
             </b-form-group>
-  
+
             <b-form-group class="input-size">
               Torácica:
               <b-form-input
@@ -194,12 +205,11 @@
             <b-form-group class="input-size mt-50">
               <b-button
                 @click="salvar"
-                style="height: 40px; margin-left: 100px; margin-top: 24px;"
+                style="height: 40px; margin-left: 100px; margin-top: 24px"
               >
                 Salvar
               </b-button>
             </b-form-group>
-
           </div>
           <div class="coluna2">
             <img width="300px" height="300px" src="../../../corpo.png" alt="" />

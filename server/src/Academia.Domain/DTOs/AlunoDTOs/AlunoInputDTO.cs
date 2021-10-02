@@ -1,4 +1,5 @@
 using System;
+using FluentValidation;
 using System.Collections.Generic;
 
 namespace Academia.Domain.DTOs
@@ -29,5 +30,36 @@ namespace Academia.Domain.DTOs
             AcademiaId = academiaId;
         }
 
+    }
+
+    public class AlunoInputDTOValidator : AbstractValidator<AlunoInputDTO> 
+    {
+        public AlunoInputDTOValidator()
+        {
+            RuleFor(aluno => aluno.Nome).NotEmpty();
+            RuleFor(aluno => aluno.Nome)
+                .Length(2, 250)
+                .WithMessage("Tamanho {TotalLength} é inválido");
+
+            RuleFor(aluno => aluno.Sobrenome).NotEmpty();
+            RuleFor(aluno => aluno.Sobrenome)
+                .Length(2, 250)
+                .WithMessage("Tamanho {TotalLength} é inválido");
+            
+            RuleFor(aluno => aluno.Email)
+                .NotEmpty()
+                .EmailAddress()
+                .WithMessage("Digite um email válido!");
+
+            RuleFor(aluno => aluno.Celular)
+                .NotEmpty()
+                .MinimumLength(13)
+                .WithMessage("Celular deve ter menos que 13 digítos!");
+    
+            RuleFor(aluno => aluno.Celular)
+                .NotEmpty()
+                .MinimumLength(13)
+                .WithMessage("Celular deve ter 13 digítos!");
+        }
     }
 }

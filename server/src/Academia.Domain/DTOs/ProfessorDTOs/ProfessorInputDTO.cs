@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FluentValidation;
 
 namespace Academia.Domain.Entities
 {
@@ -18,5 +19,28 @@ namespace Academia.Domain.Entities
             AcademiaId = academiaId;
         }
 
+    }
+
+    public class ProfessorInputDTOValidator : AbstractValidator<ProfessorInputDTO> 
+    {
+        public ProfessorInputDTOValidator()
+        {
+            RuleFor(professor => professor.Nome).NotEmpty();
+            RuleFor(professor => professor.Nome)
+                .Length(2, 250)
+                .WithMessage("Tamanho {TotalLength} é inválido");
+
+            RuleFor(professor => professor.Sobrenome).NotEmpty();
+            RuleFor(professor => professor.Sobrenome)
+                .Length(2, 250)
+                .WithMessage("Tamanho {TotalLength} é inválido");
+            
+            RuleFor(professor => professor.Email)
+                .NotEmpty()
+                .EmailAddress()
+                .WithMessage("Digite um email válido!");
+
+            RuleFor(professor => professor.AcademiaId).NotEmpty();    
+        }
     }
 }
