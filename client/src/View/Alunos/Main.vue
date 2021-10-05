@@ -195,7 +195,7 @@ export default {
           console.log(this.mensagensDeErro);
           this.showAlert();
         }
-        this.alunos.push(aluno);
+        await this.buscaAlunos();
       }
     },
   },

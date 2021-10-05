@@ -16,7 +16,7 @@
     <b-row class="mb-1">
       <b-col>
         E-mail:
-        <b-form-input v-model="aluno.email" placeholder="Email"></b-form-input>
+        <b-form-input v-model="aluno.email" type="email" placeholder="Email"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="mb-1">
@@ -25,11 +25,17 @@
         <b-form-input
           v-model="aluno.celular"
           placeholder="Celular"
+          v-mask="'(##)#####-####'"
         ></b-form-input>
       </b-col>
       <b-col>
         CPF:
-        <b-form-input v-model="aluno.cpf" placeholder="CPF"></b-form-input>
+        <b-form-input 
+           v-model="aluno.cpf" 
+           placeholder="CPF"
+           v-mask="'###.###.###-##'"
+        >
+        </b-form-input>
       </b-col>
     </b-row>
     <b-row class="mb-1">
