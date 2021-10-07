@@ -99,24 +99,26 @@ namespace Academia.Application
                 .AddEntityFrameworkStores<AcademiaContext>()
                 .AddDefaultTokenProviders();
 
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-
+            
             .AddJwtBearer(options =>
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
                     {
+                        ValidateIssuerSigningKey = true,
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
+                        IssuerSigningKey = new SymmetricSecurityKey(key)
                     };
-            });    
+            });  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

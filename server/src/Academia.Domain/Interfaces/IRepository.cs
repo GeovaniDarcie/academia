@@ -6,6 +6,7 @@ namespace Academia.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
+        Task<Usuario> Get(string username, string password);
         Task<T> InsertAsync(T item);
         Task<T> UpdateAsync(T item);
         Task<bool> DeleteAsync(long id);

@@ -20,7 +20,9 @@ namespace Academia.Application.Controllers
         {
             _service = service;
         }
+
         [HttpGet]
+        [Authorize(Roles = "Professor")]
         public async Task<ActionResult> GetAll(CancellationToken cancellationToken, int limit = 5, int page = 1)
         {
             if (!ModelState.IsValid)
@@ -41,6 +43,7 @@ namespace Academia.Application.Controllers
 
         [HttpGet]
         [Route("{id}", Name = "GetWithId")]
+        [Authorize(Roles = "Completo")]
         public async Task<IActionResult> Get(long id)
         {
             if (!ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Completo")]
         public async Task<IActionResult> Post([FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
@@ -89,6 +93,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Completo")]
         public async Task<IActionResult> Put(long id, [FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
@@ -121,6 +126,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Completo")]
         public async Task<IActionResult> Delete(long id)
         {
             if (!ModelState.IsValid)

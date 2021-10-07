@@ -30,5 +30,6 @@ namespace Academia.Data.Context
 
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<Treino> Treinos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

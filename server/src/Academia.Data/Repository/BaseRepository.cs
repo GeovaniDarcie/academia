@@ -5,6 +5,7 @@ using Academia.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Academia.Data.Repository
 {
@@ -17,6 +18,15 @@ namespace Academia.Data.Repository
         {
             _context = context;
             _dataSet = _context.Set<T>();
+        }
+
+        public async Task<Usuario> Get(string username, string password) 
+        {
+            return await _context.Usuarios
+                .Where(
+                    x => x.UserName.ToLower() == username.ToLower() &&
+                    x.Password == password
+                ).FirstOrDefaultAsync();
         }
 
         public async Task<T> InsertAsync(T item)
