@@ -73,8 +73,9 @@ export async function deleteById(id) {
 export async function login(username, password) {
     try {
         store.state.loading = true;
-        const response =  await axios
-            .post('https://localhost:5001/Authenticate/login', { username, password })
+        const response =  await api.post('/account/login', { username, password })
+        store.state.usuario = response.data.usuario;
+        console.log(store.state.usuario);
         localStorage.setItem("token", response.data.token);
     } catch (e) {
         alert('Nome de usuário ou senha inválidos!');

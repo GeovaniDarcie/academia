@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Academia.Application.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = "Completo")]
+    [Authorize(Roles = "Completo, Professor")]
     public class AnamneseController : ControllerBase
     {
         private IAnamneseService _service;

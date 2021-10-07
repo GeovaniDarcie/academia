@@ -22,7 +22,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Professor")]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<ActionResult> GetAll(CancellationToken cancellationToken, int limit = 5, int page = 1)
         {
             if (!ModelState.IsValid)

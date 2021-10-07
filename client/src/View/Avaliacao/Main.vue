@@ -2,15 +2,15 @@
   <div>
     <b-card no-body class="avaliacao bg-dark">
       <b-tabs card>
-        <b-tab title="Anamnese" class="active table">
+        <b-tab title="Anamnese" :title-link-class="'text-info'" class="active table">
           <div>
-            <b-form-group class="input-size">
-              Habitos Gerais:
+            <b-form-group class="input-size campos">
+              Hábitos gerais:
               <b-form-textarea
-                id="textarea"
+                class="mt-2 campos"
                 v-model="habitos"
                 placeholder="Digite os hábitos..."
-                rows="3"
+                rows="2"
                 max-rows="6"
               ></b-form-textarea>
             </b-form-group>
@@ -18,6 +18,7 @@
             <b-form-group class="input-size">
               Sedentarismo:
               <b-form-select
+                class="mt-2 campos"
                 v-model="sedentarismo"
                 :options="options"
               ></b-form-select>
@@ -26,28 +27,23 @@
             <b-form-group class="input-size">
               Cirurgias:
               <b-form-textarea
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Digite as cirugias realizadas..."
-                rows="3"
+                rows="2"
                 max-rows="6"
               ></b-form-textarea>
             </b-form-group>
 
-            <b-form-group class="input-size">
-              Aluno Id:
-              <b-form-input
-                v-model="alunoId"
-                style="width: 200px; display: inline; margin: 5px; height: 40px"
-              />
-              <b-button
-                @click="salvar"
-                style="height: 40px; margin-left: 100px"
-              >
-                Salvar
-              </b-button>
-            </b-form-group>
           </div>
+          <b-form-group class="">
+            <b-button
+              @click="salvar"
+              class="mr-4 mb-4 final campos"
+            >
+              Salvar
+            </b-button>
+          </b-form-group>
           <div class="coluna2">
             <template>
               <model-viewer src="scene.gltf" alt="A 3D model of a car" shadow-intensity="1" camera-controls auto-rotate ar ></model-viewer>
@@ -63,157 +59,140 @@
             </template>
           </div>
         </b-tab>
-        <b-tab title="Antropometria" class="active table">
+        <b-tab title="Antropometria" :title-link-class="'text-info'" class="active table">
           <div>
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Peso:
               <b-form-input
-                id="textarea"
-                v-model="habitos"
+                class="mt-2 campos"
+                v-model="peso"
                 placeholder="Digite o peso..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Altura:
               <b-form-input
+                class="mt-2 campos"
                 v-model="sedentarismo"
                 :options="options"
                 placeholder="Digite a altura"
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Percentual de gordura:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Digite o percentual de gordura..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Massa muscular:
               <b-form-input
-                id="textarea"
-                v-model="cirurgias"
+                class="mt-2 campos"
+                v-model="massa"
                 placeholder="Digite a massa muscular..."
               ></b-form-input>
             </b-form-group>
-
-            <b-form-group class="input-size">
-              Aluno Id:
-              <b-form-input
-                v-model="alunoId"
-                style="width: 200px; display: inline; margin: 5px; height: 40px"
-              />
-              <b-button
-                @click="salvar"
-                style="height: 40px; margin-left: 100px"
-              >
-                Salvar
-              </b-button>
-            </b-form-group>
           </div>
+          <b-form-group class="">
+            <b-button
+              @click="salvar"
+              class="mr-4 mb-4 final campos"
+            >
+              Salvar
+            </b-button>
+          </b-form-group>
           <div class="coluna2">
             <img width="300px" height="300px" src="../../../corpo.png" alt="" />
           </div>
         </b-tab>
-        <b-tab title="Dobras Cutâneas" class="active table">
+        <b-tab title="Dobras Cutâneas" :title-link-class="'text-info'" class="active table">
           <div class="grid">
-            <b-form-group class="input-size mr-2">
+            <b-form-group class="ml-4">
               Triciptal:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="habitos"
                 placeholder="Triciptal..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group>
               Subescapular:
               <b-form-input
+                class="mt-2 campos"
                 v-model="sedentarismo"
                 :options="options"
                 placeholder="Subescapular"
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size mr-2">
+            <b-form-group class="ml-4">
               Biciptal:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Digite o percentual de gordura..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Axilar Média:
               <b-form-input
-                id="textarea"
                 v-model="cirurgias"
+                class="mt-2 campos"
                 placeholder="Axilar Média..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size mr-2">
+            <b-form-group class="ml-4">
               Supra Iliaca:
               <b-form-input
-                id="textarea"
                 v-model="cirurgias"
+                class="mt-2 campos"
                 placeholder="Supra Iliaca..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Torácica:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Toracica..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size mr-2">
+            <b-form-group class="ml-4">
               Abdominal:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Abdominal..."
               ></b-form-input>
             </b-form-group>
 
-            <b-form-group class="input-size">
+            <b-form-group class="">
               Panturrilha Medial:
               <b-form-input
-                id="textarea"
+                class="mt-2 campos"
                 v-model="cirurgias"
                 placeholder="Panturrilha Medial..."
               ></b-form-input>
             </b-form-group>
-
-            <b-form-group class="input-size">
-              Aluno Id:
-              <b-form-input
-                id="textarea"
-                v-model="cirurgias"
-                placeholder="Panturrilha Medial..."
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group class="input-size mt-50">
-              <b-button
-                @click="salvar"
-                style="height: 40px; margin-left: 100px; margin-top: 24px"
-              >
-                Salvar
-              </b-button>
-            </b-form-group>
           </div>
-          <div class="coluna2">
-            <img width="300px" height="300px" src="../../../corpo.png" alt="" />
-          </div>
+          <b-form-group class="">
+            <b-button
+              @click="salvar"
+              class="mr-4 mb-4 final campos"
+            >
+              Salvar
+            </b-button>
+          </b-form-group>
         </b-tab>
       </b-tabs>
     </b-card>
@@ -266,7 +245,7 @@ export default {
   margin: 0 auto;
   margin-top: 120px;
   color: white;
-  width: 80vw;
+  width: 600px;
   height: 75vh;
   font-size: 1.1rem;
 }
@@ -295,5 +274,22 @@ img {
 .grid {
   display: grid;
   grid-template-columns: 3fr 3fr;
+  column-gap: 60px;
+}
+
+.campos {
+  border-radius: 10px;
+}
+
+.input-size {
+  width: 400px;
+}
+
+.final {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  bottom: 0;
+  right: 0;
 }
 </style>

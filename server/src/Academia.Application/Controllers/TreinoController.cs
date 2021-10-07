@@ -5,6 +5,7 @@ using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Academia.Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Academia.Application.Controllers
 {
@@ -17,6 +18,7 @@ namespace Academia.Application.Controllers
             _service = service;
         }
         [HttpGet]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<ActionResult> GetAll([FromServices] ITreinoService service)
         {
             if (!ModelState.IsValid)
@@ -37,6 +39,7 @@ namespace Academia.Application.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Completo, Professor, Aluno")]
         public async Task<IActionResult> Get(long id)
         {
             if (!ModelState.IsValid)
@@ -57,6 +60,7 @@ namespace Academia.Application.Controllers
 
         [HttpGet]
         [Route("atividades")]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<IActionResult> Get(long? treinoId, long? dia, long alunoId)
         {
             if (!ModelState.IsValid)
@@ -76,6 +80,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<IActionResult> Post([FromBody] TreinoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
@@ -108,6 +113,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<IActionResult> Put(long id, [FromBody] TreinoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)
@@ -142,6 +148,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<IActionResult> Delete(long id)
         {
             if (!ModelState.IsValid)

@@ -8,7 +8,8 @@ const store = new Vuex.Store({
       aluno: {},
       autenticado: false,
       loading: false,
-      errors: {}
+      errors: {},
+      usuario: {},
     },
     mutations: {
       changeAluno(state, payload) {

@@ -5,10 +5,12 @@ using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Academia.Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Academia.Application.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "Completo, Professor")]
     public class AntropometriaController : ControllerBase
     {
         private IAntropometriaService _service;
