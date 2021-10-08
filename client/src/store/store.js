@@ -10,10 +10,14 @@ const store = new Vuex.Store({
       loading: false,
       errors: {},
       usuario: {},
+      academia: {}
     },
     mutations: {
       changeAluno(state, payload) {
         state.aluno = { ...payload }
+      },
+      changeAcademia(state, payload) {
+        state.academia = { ...payload }
       },
       alunoAutorizado(state, payload) {
         state.autenticado = payload;
@@ -25,6 +29,9 @@ const store = new Vuex.Store({
     actions: {
       changeAluno (context, payload) {
         context.commit('changeAluno', payload)
+      },
+      changeAcademia (context, payload) {
+        context.commit('changeAcademia', payload)
       },
       alunoAutorizado (context, payload) {
         context.commit('alunoAutorizado', payload)

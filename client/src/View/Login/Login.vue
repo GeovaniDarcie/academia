@@ -34,7 +34,16 @@ export default {
            const validou = await login(this.username, this.password)
            if(validou) {
                this.$store.state.autenticado = validou;
-               this.$router.push({ name: 'alunos' })
+               
+               console.log(this.$store.state.usuario);
+               if (this.$store.state.usuario.role == 'Mestre') {
+                   this.$router.push({ name: 'academias' })
+               } 
+            
+               if (this.$store.state.usuario.role == 'Completo' ||
+                this.$store.state.usuario.role == 'Professor') {
+                    this.$router.push({ name: 'alunos' })
+                }
            } else {
                this.username = '';
                this.password = '';

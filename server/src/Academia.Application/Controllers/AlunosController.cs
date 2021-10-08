@@ -23,7 +23,7 @@ namespace Academia.Application.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Completo, Professor")]
-        public async Task<ActionResult> GetAll(CancellationToken cancellationToken, int limit = 5, int page = 1)
+        public async Task<ActionResult> GetAll([FromQuery] long academiaId, CancellationToken cancellationToken, int limit = 5, int page = 1)
         {
             if (!ModelState.IsValid)
             {
@@ -32,7 +32,7 @@ namespace Academia.Application.Controllers
 
             try
             {
-                return Ok(await _service.GetByPageAsync(limit, page, cancellationToken));
+                return Ok(await _service.GetByPageAsync(academiaId, limit, page, cancellationToken));
             }
             catch (ArgumentException e)
             {

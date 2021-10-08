@@ -10,7 +10,7 @@ namespace Academia.Domain.Interfaces.Services.Alunos
     public interface IAlunoService
     {
         Task<Aluno> Get(long id);
-        Task<AlunoListOutputGetAllDTO> GetByPageAsync(int limit, int page, CancellationToken cancellationToken);
+        Task<AlunoListOutputGetAllDTO> GetByPageAsync(long academiaId, int limit, int page, CancellationToken cancellationToken);
         Task<IEnumerable<Aluno>> GetAll();
         Task<Aluno> Post(Aluno aluno);
 

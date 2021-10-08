@@ -7,12 +7,14 @@ import Login from '../View/Login/Login'
 import Alunos from '../View/Alunos/Alunos'
 import Avaliacao from '../View/Avaliacao/Avaliacao'
 import Treino from '../View/Treinos/Treino'
+import Academia from '../View/Academia/Academia'
 
 import store from '../store/store'
 
 const routes = [
     { path: '/', name: 'login', component: Login },
     { path: '/alunos', name: 'alunos', component: Alunos },
+    { path: '/academias', name: 'academias', component: Academia },
     { path: '/avaliacao', name: 'avaliacao', component: Avaliacao },
     { path: '/treino', name: 'treino', component: Treino }
 ]

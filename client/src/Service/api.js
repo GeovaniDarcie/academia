@@ -75,7 +75,6 @@ export async function login(username, password) {
         store.state.loading = true;
         const response =  await api.post('/account/login', { username, password })
         store.state.usuario = response.data.usuario;
-        console.log(store.state.usuario);
         localStorage.setItem("token", response.data.token);
     } catch (e) {
         alert('Nome de usuário ou senha inválidos!');
@@ -129,5 +128,28 @@ export async function buscarTreinos(dia, id ) {
     } catch (e) {
         console.log(e);
     }
+}
+
+export async function criaAcademia(academia) {
+    try {   
+        const response = await api.post('./academiaentity', {
+            nome: academia.nome,
+            endereco: academia.sobrenome,
+            email: academia.email,
+        });
+
+        return response.data;
+
+    } catch(err)
+    {
+        store.state.errors = err.response.data.errors;
+    }
+    
+}
+
+export async function buscaAcademias() {
+    const response = await api.get('/academiaentity')
+
+    return response.data;
 }
 

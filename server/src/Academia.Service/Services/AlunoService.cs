@@ -36,9 +36,10 @@ namespace Academia.Service.Services
             return await _repository.SelectAsync();
         }
 
-    public async Task<AlunoListOutputGetAllDTO> GetByPageAsync(int limit, int page, CancellationToken cancellationToken) {
+    public async Task<AlunoListOutputGetAllDTO> GetByPageAsync(long academiaId, int limit, int page, CancellationToken cancellationToken) {
         var pagedModel = await _context.Alunos
                 .AsNoTracking()
+                .Where(a => a.AcademiaId == academiaId)
                 .OrderBy(p => p.Id)
                 .PaginateAsync(page, limit, cancellationToken);
 
