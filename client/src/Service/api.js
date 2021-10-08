@@ -46,7 +46,8 @@ export async function getAll(limit, page) {
     const response = await api.get('/alunos', {
         params: {
             limit: limit,
-            page: page
+            page: page,
+            academiaId: 1
         }
     })
 
@@ -149,6 +150,18 @@ export async function criaAcademia(academia) {
 
 export async function buscaAcademias() {
     const response = await api.get('/academiaentity')
+
+    return response.data;
+}
+
+export async function atualizaAcademia(id, academia) {
+    delete academia.id
+    const response = await api.put(`/academiaentity/${id}`, academia)
+    return response.data;
+}
+
+export async function deletaAcademia(id) {
+    const response = await api.delete(`/academiaentity/${id}`);
 
     return response.data;
 }

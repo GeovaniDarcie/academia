@@ -85,7 +85,7 @@ namespace Academia.Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(long id, [FromBody] AcademiaInputDTO inputDTO)
         {
             if (!ModelState.IsValid)

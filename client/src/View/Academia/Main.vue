@@ -9,14 +9,14 @@
 
     <b-modal
       v-model="showModal"
-      :title="this.editAcademia ? 'Editar Academia' : 'Cadastrar Academia'"
+      :title="this.editAcademia ? 'Editar academia' : 'Cadastrar academia'"
       :header-bg-variant="backgroundModal"
       :header-text-variant="textModal"
       :footer-bg-variant="backgroundModal"
       :footer-text-variant="textModal"
       @ok="handleOk"
     >
-      <ModalCadastro />
+      <ModalAcademia />
 
       <template #modal-footer="{ ok, cancel }">
         <b>Academia</b>
@@ -62,13 +62,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { buscaAcademias, criaAcademia, updated, deleteById } from "../../Service/api.js";
-import ModalCadastro from "../../Components/ModalCadastro";
+import { buscaAcademias, criaAcademia, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
+import ModalAcademia from "../../Components/ModalAcademia";
 
 export default {
   name: "Main",
   components: {
-    ModalCadastro,
+    ModalAcademia,
   },
   data() {
     return {
@@ -142,16 +142,16 @@ export default {
       this.showModal = true;
     },
 
-    editarAcademia(Academia) {
+    editarAcademia(academia) {
       this.editAcademia = true;
       this.showModal = true;
 
       //seta o state com o objeto Academia
-      this.changeAcademia(Academia);
+      this.changeAcademia(academia);
     },
 
-    async deletarAcademia(Academia) {
-      const deletado = await deleteById(Academia.id);
+    async deletarAcademia(academia) {
+      const deletado = await deletaAcademia(academia.id);
 
       if (deletado) {
         const response = await buscaAcademias();
@@ -161,13 +161,13 @@ export default {
 
     async handleOk() {
       if (this.editAcademia) {
-        const Academia = await updated(this.Academia.id, this.Academia);
-        const index = this.academias.findIndex((a) => a.id === Academia.id);
-        this.$set(this.academias, index, Academia);
+        const academia = await atualizaAcademia(this.academia.id, this.academia);
+        const index = this.academias.findIndex((a) => a.id === academia.id);
+        this.$set(this.academias, index, academia);
       } else {
-        const Academia = await criaAcademia(this.Academia);
+        const academia = await criaAcademia(this.academia);
         
-        if (!Academia) {
+        if (!academia) {
           this.mensagensDeErro = [];
           Object.entries(this.errors).forEach(([ , value]) => {
             this.mensagensDeErro.push(value[0])
