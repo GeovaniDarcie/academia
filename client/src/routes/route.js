@@ -9,14 +9,12 @@ import Avaliacao from '../View/Avaliacao/Avaliacao'
 import Treino from '../View/Treinos/Treino'
 import Academia from '../View/Academia/Academia'
 
-import store from '../store/store'
-
 const routes = [
     { path: '/', name: 'login', component: Login },
     { path: '/alunos', name: 'alunos', component: Alunos },
     { path: '/academias', name: 'academias', component: Academia },
     { path: '/avaliacao', name: 'avaliacao', component: Avaliacao },
-    { path: '/treino', name: 'treino', component: Treino }
+    { path: '/treino/:id', name: 'treino', component: Treino }
 ]
 
 const router = new VueRouter({
@@ -25,7 +23,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.name !== 'login' && !store.state.autenticado) {
+    const token = localStorage.getItem("token");
+    if (to.name !== 'login' && token == null) {
         next({ name: 'login'})
     } else {
         next()

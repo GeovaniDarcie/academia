@@ -63,18 +63,20 @@
       </table>
       <h5 class="mr-3 final">
             <span class="font-treino">Aluno: </span>
-            <b class="text-info">{{ nomeCompleto }}</b>
+            <b class="text-info">{{ nome }} {{ sobrenome }}</b>
       </h5>
     </div>
   </div>
 </template>
 
 <script>
-import { post, getAll } from "../../Service/api";
+import { post, getAll, getById } from "../../Service/api";
 
 export default {
   data() {
     return {
+      nome: '',
+      sobrenome: '',      
       treinoId: 0,
       descricao: "",
       series: 0,
@@ -94,19 +96,33 @@ export default {
     };
   },
   computed: {
-    nomeCompleto() {
-      return `${this.$route.params.aluno.nome} ${this.$route.params.aluno.sobrenome}`;
-    },
     alunoId() {
-      return this.$route.params.aluno.id
+      return this.$route.params.id
     },
   },
+
+  created() {
+    this.nomeCompleto();
+  },
+
   methods: {
+    async nomeCompleto() {
+      const aluno = await getById(this.$route.params.id);
+
+      this.nome = aluno.nome;
+      this.sobrenome = aluno.sobrenome;
+    },
+
     async onChange() {
+      console.log(this.selected)
       if (this.selected) {
+        console.log('this.alunoId');
+        console.log(this.alunoId);
         const treino = { dia: this.selected, alunoId: this.alunoId };
         const response = await getAll(treino, './treino/atividades');
         this.atividades = response.atividades;
+
+        console.log(this.atividades);
 
         if (!this.atividades) {
           this.atividades = [];

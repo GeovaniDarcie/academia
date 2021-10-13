@@ -55,7 +55,7 @@
             <b-icon icon="arrow-down-circle-fill"></b-icon>
           </template>
           <b-dropdown-item :to="{ name: 'avaliacao', params: { aluno: row.item }}">Avaliação Física</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'treino', params: { aluno: row.item }}">Treinos</b-dropdown-item>
+          <b-dropdown-item :to="{ path: `treino/${row.item.id}`, params: { aluno: row.item }}">Treinos</b-dropdown-item>
         </b-dropdown>
         <b-button size="sm" @click="editarAluno(row.item)" class="mr-1">
           <b-icon icon="pencil-square"></b-icon>

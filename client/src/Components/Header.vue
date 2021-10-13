@@ -18,7 +18,7 @@
             <b-nav vertical>
               <b-nav-item :to="{ name: 'alunos' }" @click="hide">Alunos</b-nav-item>
               <b-nav-item :to="{ name: 'avaliacao' }" @click="hide">Avaliação Física</b-nav-item>
-              <b-nav-item :to="{ name: 'treino' }" @click="hide">Treinos</b-nav-item>
+              <b-nav-item :to="{ path: 'treino' }" @click="hide">Treinos</b-nav-item>
             </b-nav>
           </nav>
         </div>
