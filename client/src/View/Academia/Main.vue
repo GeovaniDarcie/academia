@@ -62,7 +62,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { getAll, criaAcademia, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
+import { getAll, post, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
 import ModalAcademia from "../../Components/ModalAcademia";
 
 export default {
@@ -130,8 +130,8 @@ export default {
     },
     async buscaAcademias() {
       const response = await getAll({}, './academiaentity');
-      this.totalRows = 10;
-      this.academias = response;
+      this.totalRows = response.totalItems;
+      this.academias = response.items;
     },
 
     novaAcademia() {
@@ -165,7 +165,7 @@ export default {
         const index = this.academias.findIndex((a) => a.id === academia.id);
         this.$set(this.academias, index, academia);
       } else {
-        const academia = await criaAcademia(this.academia);
+        const academia = await post(this.academia, './academiaentity');
         
         if (!academia) {
           this.mensagensDeErro = [];
