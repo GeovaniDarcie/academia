@@ -62,7 +62,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { buscaAcademias, criaAcademia, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
+import { getAll, criaAcademia, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
 import ModalAcademia from "../../Components/ModalAcademia";
 
 export default {
@@ -129,7 +129,7 @@ export default {
       this.dismissCountDown = this.dismissSecs
     },
     async buscaAcademias() {
-      const response = await buscaAcademias();
+      const response = await getAll({}, './academiaentity');
       this.totalRows = 10;
       this.academias = response;
     },
@@ -154,7 +154,7 @@ export default {
       const deletado = await deletaAcademia(academia.id);
 
       if (deletado) {
-        const response = await buscaAcademias();
+        const response = await getAll({}, './academiaentity');
         this.academias = response.items;
       }
     },

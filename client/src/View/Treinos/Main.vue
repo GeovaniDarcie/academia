@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { criarTreino, criarAtividade, buscarTreinos } from "../../Service/api";
+import { post, getAll } from "../../Service/api";
 
 export default {
   data() {
@@ -104,12 +104,14 @@ export default {
   methods: {
     async onChange() {
       if (this.selected) {
-        const response = await buscarTreinos(this.selected, this.alunoId);
+        const treino = { dia: this.selected, alunoId: this.alunoId };
+        const response = await getAll(treino, './treino/atividades');
         this.atividades = response.atividades;
 
         if (!this.atividades) {
           this.atividades = [];
-          const data = await criarTreino(this.selected, this.alunoId);
+          const treino = { dia: this.selected, alunoId: this.alunoId };
+          const data = await post(treino, './treino');
           this.treinoId = data.id;
         } else {
           this.treinoId = this.atividades[0].treinoId;
@@ -126,10 +128,10 @@ export default {
       
       this.atividades.push(atividade);
 
-      await criarAtividade({
+      await post({
         ...atividade, 
         treinoId: this.treinoId,
-      });
+      }, './atividade');
 
       this.descricao = "";
       this.series = "";

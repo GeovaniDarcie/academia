@@ -5,9 +5,11 @@ using Academia.Domain.Entities;
 using Academia.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Academia.Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Academia.Application.Controllers
 {
+    [Authorize(Roles = "Completo")]
     [Route("api/[controller]")]
     public class ProfessoresController : ControllerBase
     {

@@ -149,7 +149,8 @@ export default {
       this.dismissCountDown = this.dismissSecs
     },
     async buscaAlunos() {
-      const response = await getAll(this.perPage, this.currentPage);
+      const dadosPagina = { limit: this.perPage, page: this.currentPage };
+      const response = await getAll(dadosPagina, './alunos');
       this.totalRows = response.totalItems
       this.alunos = response.items;
     },
@@ -174,7 +175,8 @@ export default {
       const deletado = await deleteById(aluno.id);
 
       if (deletado) {
-        const response = await getAll(this.perPage, this.currentPage);
+        const dadosPagina = { limit: this.perPage, page: this.currentPage };
+        const response = await getAll(dadosPagina, './alunos');
         this.alunos = response.items;
       }
     },
@@ -185,7 +187,7 @@ export default {
         const index = this.alunos.findIndex((a) => a.id === aluno.id);
         this.$set(this.alunos, index, aluno);
       } else {
-        const aluno = await post(this.aluno);
+        const aluno = await post(this.aluno, './alunos');
         
         if (!aluno) {
           this.mensagensDeErro = [];

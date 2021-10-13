@@ -18,18 +18,11 @@ api.interceptors.request.use(
   }
 );
 
-
-export async function post(aluno) {
+export async function post(json, recurso) {
     try {   
-        const response = await api.post('./alunos', {
-            nome: aluno.nome,
-            sobrenome: aluno.sobrenome,
-            email: aluno.email,
-            celular: aluno.celular,
-            cpf: aluno.cpf,
-            dataDeNascimento: aluno.dataDeNascimento,
-            genero: aluno.genero,
-            inicioDeMatricula: aluno.inicioDeMatricula,
+        console.log(json);
+        const response = await api.post(recurso, {
+            ...json,
             academiaId: 1
         });
 
@@ -39,14 +32,12 @@ export async function post(aluno) {
     {
         store.state.errors = err.response.data.errors;
     }
-    
 }
 
-export async function getAll(limit, page) {
-    const response = await api.get('/alunos', {
+export async function getAll(json, recurso) {
+    const response = await api.get(recurso, {
         params: {
-            limit: limit,
-            page: page,
+            ...json,
             academiaId: 1
         }
     })
@@ -85,73 +76,6 @@ export async function login(username, password) {
 
     store.state.loading = false;
     return true;
-}
-
-export async function criarTreino (dia, alunoId) {
-    try {
-        const response = await api.post('/treino', {
-            Dia: dia,
-            alunoId: alunoId
-        });
-
-        return response.data;
-    } catch (e) {
-        console.log('Treino inválido')
-    }
-}
-
-export async function criarAtividade (atividade) {
-    try {
-        const response = await api.post('/atividade', {
-            descricao: atividade.descricao,
-            series: atividade.series,
-            repeticoes: atividade.repeticoes,
-            treinoId: atividade.treinoId,
-        });
-
-        return response.data;
-
-    } catch (e) {
-        console.log('Atividade inválida')
-    }
-}
-
-export async function buscarTreinos(dia, id ) {
-    try {
-        const response = await api.get('/treino/atividades', {
-            params: {
-                dia: dia,
-                alunoId: id
-            }
-        })
-
-        return response.data;
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-export async function criaAcademia(academia) {
-    try {   
-        const response = await api.post('./academiaentity', {
-            nome: academia.nome,
-            endereco: academia.sobrenome,
-            email: academia.email,
-        });
-
-        return response.data;
-
-    } catch(err)
-    {
-        store.state.errors = err.response.data.errors;
-    }
-    
-}
-
-export async function buscaAcademias() {
-    const response = await api.get('/academiaentity')
-
-    return response.data;
 }
 
 export async function atualizaAcademia(id, academia) {
