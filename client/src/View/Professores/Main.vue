@@ -13,15 +13,15 @@
       {{ mensagem }}
     </b-alert>
     <div class="right">
-      <b-button @click="novoAluno" class="ml-2 mr-4 mb-2" variant="dark">
-        Cadastrar Aluno
+      <b-button @click="novoProfessor" class="ml-2 mr-4 mb-2" variant="dark">
+        Cadastrar professor
         <b-icon icon="plus-circle-fill" />
       </b-button>
     </div>
 
     <b-modal
       v-model="showModal"
-      :title="this.editAluno ? 'Editar aluno' : 'Cadastrar aluno'"
+      :title="this.editprofessor ? 'Editar professor' : 'Cadastrar professor'"
       :header-bg-variant="backgroundModal"
       :header-text-variant="textModal"
       :footer-bg-variant="backgroundModal"
@@ -39,7 +39,7 @@
 
     <b-table
       :table-variant="'dark'"
-      :items="alunos"
+      :items="professors"
       :fields="fields"
       primary-key="a"
       hover
@@ -54,13 +54,13 @@
           <template #button-content>
             <b-icon icon="arrow-down-circle-fill"></b-icon>
           </template>
-          <b-dropdown-item :to="{ name: 'avaliacao', params: { aluno: row.item }}">Avaliação Física</b-dropdown-item>
-          <b-dropdown-item :to="{ path: `treino/${row.item.id}`, params: { aluno: row.item }}">Treinos</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'avaliacao', params: { professor: row.item }}">Avaliação Física</b-dropdown-item>
+          <b-dropdown-item :to="{ path: `treino/${row.item.id}`, params: { professor: row.item }}">Treinos</b-dropdown-item>
         </b-dropdown>
-        <b-button size="sm" @click="editarAluno(row.item)" class="mr-1">
+        <b-button size="sm" @click="editarprofessor(row.item)" class="mr-1">
           <b-icon icon="pencil-square"></b-icon>
         </b-button>
-        <b-button size="sm" @click="deletarAluno(row.item)" class="mr-1">
+        <b-button size="sm" @click="deletarProfessor(row.item)" class="mr-1">
           <b-icon icon="trash-fill"></b-icon>
         </b-button>
       </template>
@@ -91,13 +91,13 @@ export default {
   },
   data() {
     return {
-      alunos: [],
+      professors: [],
       show: false,
       edit: false,
-      idAluno: 0,
+      idprofessor: 0,
       showModal: false,
       backgroundModal: "dark",
-      editAluno: false,
+      editprofessor: false,
       textModal: "light",
       dismissSecs: 5,
       dismissCountDown: 0,
@@ -120,27 +120,27 @@ export default {
   },
 
   mounted() {
-    this.buscaAlunos();
+    this.buscaprofessors();
   },
 
   watch: {
     currentPage: {
       handler() {
-        this.buscaAlunos();
+        this.buscaprofessors();
       }
     }
   },
 
   computed: {
     items() {
-      return this.alunos;
+      return this.professors;
     },
 
-    ...mapState(["aluno", "errors"]),
+    ...mapState(["professor", "errors"]),
   },
 
   methods: {
-    ...mapActions(["changeAluno"]),
+    ...mapActions(["changeProfessor"]),
     
     countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
@@ -148,48 +148,48 @@ export default {
     showAlert() {
       this.dismissCountDown = this.dismissSecs
     },
-    async buscaAlunos() {
+    async buscaprofessors() {
       const dadosPagina = { limit: this.perPage, page: this.currentPage };
-      const response = await getAll(dadosPagina, './alunos');
+      const response = await getAll(dadosPagina, './professores');
       this.totalRows = response.totalItems
-      this.alunos = response.items;
+      this.professors = response.items;
     },
 
-    novoAluno() {
-      // limpa a store (state aluno)
-      this.changeAluno({});
+    novoProfessor() {
+      // limpa a store (state professor)
+      this.changeProfessor({});
 
-      this.editAluno = false;
+      this.editprofessor = false;
       this.showModal = true;
     },
 
-    editarAluno(aluno) {
-      this.editAluno = true;
+    editarprofessor(professor) {
+      this.editprofessor = true;
       this.showModal = true;
 
-      //seta o state com o objeto aluno
-      this.changeAluno(aluno);
+      //seta o state com o objeto professor
+      this.changeProfessor(professor);
     },
 
-    async deletarAluno(aluno) {
-      const deletado = await deleteId(aluno.id, './alunos');
+    async deletarProfessor(professor) {
+      const deletado = await deleteId(professor.id, './professores');
 
       if (deletado) {
         const dadosPagina = { limit: this.perPage, page: this.currentPage };
-        const response = await getAll(dadosPagina, './alunos');
-        this.alunos = response.items;
+        const response = await getAll(dadosPagina, './professores');
+        this.professors = response.items;
       }
     },
 
     async handleOk() {
-      if (this.editAluno) {
-        const aluno = await updated(this.aluno.id, this.aluno);
-        const index = this.alunos.findIndex((a) => a.id === aluno.id);
-        this.$set(this.alunos, index, aluno);
+      if (this.editprofessor) {
+        const professor = await updated(this.professor.id, this.professor);
+        const index = this.professors.findIndex((a) => a.id === professor.id);
+        this.$set(this.professors, index, professor);
       } else {
-        const aluno = await post(this.aluno, './alunos');
+        const professor = await post(this.professor, './professors');
         
-        if (!aluno) {
+        if (!professor) {
           this.mensagensDeErro = [];
           Object.entries(this.errors).forEach(([ , value]) => {
             this.mensagensDeErro.push(value[0])
@@ -197,7 +197,7 @@ export default {
           console.log(this.mensagensDeErro);
           this.showAlert();
         }
-        await this.buscaAlunos();
+        await this.buscaprofessors();
       }
     },
   },

@@ -23,7 +23,7 @@ export async function post(json, recurso) {
         console.log(json);
         const response = await api.post(recurso, {
             ...json,
-            academiaId: 1
+            academiaId: 2
         });
 
         return response.data;
@@ -38,7 +38,7 @@ export async function getAll(json, recurso) {
     const response = await api.get(recurso, {
         params: {
             ...json,
-            academiaId: 1
+            academiaId: 2
         }
     })
 
@@ -56,8 +56,8 @@ export async function updated(id, aluno) {
     return response.data;
 }
 
-export async function deleteById(id) {
-    const response = await api.delete(`/alunos/${id}`);
+export async function deleteId(id, recurso) {
+    const response = await api.delete(`${recurso}/${id}`);
 
     return response.data;
 }
@@ -81,12 +81,6 @@ export async function login(username, password) {
 export async function atualizaAcademia(id, academia) {
     delete academia.id
     const response = await api.put(`/academiaentity/${id}`, academia)
-    return response.data;
-}
-
-export async function deletaAcademia(id) {
-    const response = await api.delete(`/academiaentity/${id}`);
-
     return response.data;
 }
 

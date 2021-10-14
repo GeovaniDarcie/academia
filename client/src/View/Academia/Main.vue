@@ -62,7 +62,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { getAll, post, atualizaAcademia, deletaAcademia } from "../../Service/api.js";
+import { getAll, post, atualizaAcademia, deleteId } from "../../Service/api.js";
 import ModalAcademia from "../../Components/ModalAcademia";
 
 export default {
@@ -151,7 +151,7 @@ export default {
     },
 
     async deletarAcademia(academia) {
-      const deletado = await deletaAcademia(academia.id);
+      const deletado = await deleteId(academia.id, './academiaentity');
 
       if (deletado) {
         const response = await getAll({}, './academiaentity');
