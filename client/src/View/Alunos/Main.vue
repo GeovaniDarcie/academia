@@ -149,7 +149,8 @@ export default {
       this.dismissCountDown = this.dismissSecs
     },
     async buscaAlunos() {
-      const dadosPagina = { limit: this.perPage, page: this.currentPage };
+      const academiaId = localStorage.getItem("academiaId");
+      const dadosPagina = { limit: this.perPage, page: this.currentPage, academiaId};
       const response = await getAll(dadosPagina, './alunos');
       this.totalRows = response.totalItems
       this.alunos = response.items;
@@ -175,7 +176,8 @@ export default {
       const deletado = await deleteId(aluno.id, './alunos');
 
       if (deletado) {
-        const dadosPagina = { limit: this.perPage, page: this.currentPage };
+        const academiaId = localStorage.getItem("academiaId");
+        const dadosPagina = { limit: this.perPage, page: this.currentPage, academiaId };
         const response = await getAll(dadosPagina, './alunos');
         this.alunos = response.items;
       }
@@ -183,18 +185,18 @@ export default {
 
     async handleOk() {
       if (this.editAluno) {
-        const aluno = await updated(this.aluno.id, this.aluno);
+        const aluno = await updated(this.aluno.id, this.aluno, './alunos');
         const index = this.alunos.findIndex((a) => a.id === aluno.id);
         this.$set(this.alunos, index, aluno);
       } else {
-        const aluno = await post(this.aluno, './alunos');
+        const academiaId = localStorage.getItem("academiaId");
+        const aluno = await post({ ...this.aluno, academiaId } , './alunos');
         
         if (!aluno) {
           this.mensagensDeErro = [];
           Object.entries(this.errors).forEach(([ , value]) => {
             this.mensagensDeErro.push(value[0])
           });
-          console.log(this.mensagensDeErro);
           this.showAlert();
         }
         await this.buscaAlunos();

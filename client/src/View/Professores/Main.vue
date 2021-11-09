@@ -28,7 +28,7 @@
       :footer-text-variant="textModal"
       @ok="handleOk"
     >
-      <ModalCadastro />
+      <ModalProfessor />
 
       <template #modal-footer="{ ok, cancel }">
         <b>Academia</b>
@@ -39,7 +39,7 @@
 
     <b-table
       :table-variant="'dark'"
-      :items="professors"
+      :items="professores"
       :fields="fields"
       primary-key="a"
       hover
@@ -50,13 +50,6 @@
       :tbody-transition-props="transProps"
     >
       <template #cell(opcoes)="row">
-        <b-dropdown class="mr-1 menu-suspenso" size="sm" no-caret>
-          <template #button-content>
-            <b-icon icon="arrow-down-circle-fill"></b-icon>
-          </template>
-          <b-dropdown-item :to="{ name: 'avaliacao', params: { professor: row.item }}">Avaliação Física</b-dropdown-item>
-          <b-dropdown-item :to="{ path: `treino/${row.item.id}`, params: { professor: row.item }}">Treinos</b-dropdown-item>
-        </b-dropdown>
         <b-button size="sm" @click="editarprofessor(row.item)" class="mr-1">
           <b-icon icon="pencil-square"></b-icon>
         </b-button>
@@ -82,16 +75,16 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { getAll, post, updated, deleteId } from "../../Service/api.js";
-import ModalCadastro from "../../Components/ModalCadastro";
+import ModalProfessor from "../../Components/ModalProfessor";
 
 export default {
   name: "Main",
   components: {
-    ModalCadastro,
+    ModalProfessor,
   },
   data() {
     return {
-      professors: [],
+      professores: [],
       show: false,
       edit: false,
       idprofessor: 0,
@@ -109,8 +102,7 @@ export default {
         { key: "id", sortable: true },
         { key: "nome", sortable: true },
         { key: "sobrenome", sortable: true },
-        { key: "cpf", sortable: true },
-        { key: "celular", sortable: true },
+        { key: "email", sortable: true },
         { key: "opcoes", label: "Opções" },
       ],
       currentPage: 1,
@@ -120,20 +112,20 @@ export default {
   },
 
   mounted() {
-    this.buscaprofessors();
+    this.buscaprofessores();
   },
 
   watch: {
     currentPage: {
       handler() {
-        this.buscaprofessors();
+        this.buscaprofessores();
       }
     }
   },
 
   computed: {
     items() {
-      return this.professors;
+      return this.professores;
     },
 
     ...mapState(["professor", "errors"]),
@@ -148,11 +140,12 @@ export default {
     showAlert() {
       this.dismissCountDown = this.dismissSecs
     },
-    async buscaprofessors() {
-      const dadosPagina = { limit: this.perPage, page: this.currentPage };
+    async buscaprofessores() {
+      const academiaId = localStorage.getItem("academiaId");
+      const dadosPagina = { limit: this.perPage, page: this.currentPage, academiaId};
       const response = await getAll(dadosPagina, './professores');
       this.totalRows = response.totalItems
-      this.professors = response.items;
+      this.professores = response.items;
     },
 
     novoProfessor() {
@@ -175,19 +168,21 @@ export default {
       const deletado = await deleteId(professor.id, './professores');
 
       if (deletado) {
-        const dadosPagina = { limit: this.perPage, page: this.currentPage };
+        const academiaId = localStorage.getItem("academiaId");
+        const dadosPagina = { limit: this.perPage, page: this.currentPage, academiaId };
         const response = await getAll(dadosPagina, './professores');
-        this.professors = response.items;
+        this.professores = response.items;
       }
     },
 
     async handleOk() {
       if (this.editprofessor) {
-        const professor = await updated(this.professor.id, this.professor);
-        const index = this.professors.findIndex((a) => a.id === professor.id);
-        this.$set(this.professors, index, professor);
+        const professor = await updated(this.professor.id, this.professor, './professores');
+        const index = this.professores.findIndex((a) => a.id === professor.id);
+        this.$set(this.professores, index, professor);
       } else {
-        const professor = await post(this.professor, './professors');
+        const academiaId = localStorage.getItem("academiaId");
+        const professor = await post({ ...this.professor, academiaId } , './professores');
         
         if (!professor) {
           this.mensagensDeErro = [];
@@ -197,7 +192,7 @@ export default {
           console.log(this.mensagensDeErro);
           this.showAlert();
         }
-        await this.buscaprofessors();
+        await this.buscaprofessores();
       }
     },
   },

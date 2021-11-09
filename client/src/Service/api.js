@@ -19,11 +19,10 @@ api.interceptors.request.use(
 );
 
 export async function post(json, recurso) {
+    console.log(json)
     try {   
-        console.log(json);
         const response = await api.post(recurso, {
             ...json,
-            academiaId: 2
         });
 
         return response.data;
@@ -35,10 +34,10 @@ export async function post(json, recurso) {
 }
 
 export async function getAll(json, recurso) {
+    console.log(json)
     const response = await api.get(recurso, {
         params: {
             ...json,
-            academiaId: 2
         }
     })
 
@@ -50,9 +49,12 @@ export async function getById(id) {
     return response.data;
 }
 
-export async function updated(id, aluno) {
-    delete aluno.id
-    const response = await api.put(`/alunos/${id}`, aluno)
+export async function updated(id, json, recurso) {
+    delete json.id
+    console.log(id)
+    console.log(json)
+    console.log(recurso)
+    const response = await api.put(`${recurso}/${id}`, json)
     return response.data;
 }
 
@@ -68,6 +70,7 @@ export async function login(username, password) {
         const response =  await api.post('/account/login', { username, password })
         store.state.usuario = response.data.usuario;
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("academiaId", response.data.usuario.academiaId);
     } catch (e) {
         alert('Nome de usuário ou senha inválidos!');
         store.state.loading = false;
@@ -76,11 +79,5 @@ export async function login(username, password) {
 
     store.state.loading = false;
     return true;
-}
-
-export async function atualizaAcademia(id, academia) {
-    delete academia.id
-    const response = await api.put(`/academiaentity/${id}`, academia)
-    return response.data;
 }
 

@@ -20,7 +20,7 @@ namespace Academia.Application.Controllers
             _service = service;
         }
         [HttpGet]
-        public async Task<ActionResult> GetAll(CancellationToken cancellationToken, int limit = 5, int page = 1)
+        public async Task<ActionResult> GetAll([FromQuery] long academiaId, CancellationToken cancellationToken, int limit = 5, int page = 1)
         {
             if (!ModelState.IsValid)
             {
@@ -29,7 +29,7 @@ namespace Academia.Application.Controllers
 
             try
             {
-                return Ok(await _service.GetByPageAsync(limit, page, cancellationToken));
+                return Ok(await _service.GetByPageAsync(academiaId, limit, page, cancellationToken));
             }
             catch (ArgumentException e)
             {
@@ -86,7 +86,7 @@ namespace Academia.Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(long id, [FromBody] ProfessorInputDTO inputDTO)
         {
             if (!ModelState.IsValid)

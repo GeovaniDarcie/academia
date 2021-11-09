@@ -10,7 +10,7 @@ namespace Academia.Domain.Interfaces.Services
     {
         Task<Professor> Get(long id);
         Task<IEnumerable<Professor>> GetAll();
-         Task<ProfessorOutputGetAllDTO> GetByPageAsync(int limit, int page, CancellationToken cancellationToken);
+         Task<ProfessorOutputGetAllDTO> GetByPageAsync(long academiaId, int limit, int page, CancellationToken cancellationToken);
         Task<Professor> Post(Professor professor);
 
         Task<Professor> Put(Professor professor);

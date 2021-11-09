@@ -62,7 +62,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { getAll, post, atualizaAcademia, deleteId } from "../../Service/api.js";
+import { getAll, post, updated, deleteId } from "../../Service/api.js";
 import ModalAcademia from "../../Components/ModalAcademia";
 
 export default {
@@ -161,7 +161,7 @@ export default {
 
     async handleOk() {
       if (this.editAcademia) {
-        const academia = await atualizaAcademia(this.academia.id, this.academia);
+        const academia = await updated(this.academia.id, this.academia, './academiaentity');
         const index = this.academias.findIndex((a) => a.id === academia.id);
         this.$set(this.academias, index, academia);
       } else {

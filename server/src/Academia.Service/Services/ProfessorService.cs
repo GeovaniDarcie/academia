@@ -36,14 +36,15 @@ namespace Academia.Service.Services
             return await _repository.SelectAsync();
         }
 
-        public async Task<ProfessorOutputGetAllDTO> GetByPageAsync(int limit, int page, CancellationToken cancellationToken) {
+        public async Task<ProfessorOutputGetAllDTO> GetByPageAsync(long academiaId, int limit, int page, CancellationToken cancellationToken) {
             var pagedModel = await _context.Professores
                     .AsNoTracking()
+                    .Where(p => p.AcademiaId == academiaId)
                     .OrderBy(p => p.Id)
                     .PaginateAsync(page, limit, cancellationToken);
 
             if (!pagedModel.Items.Any()) {
-                throw new Exception("Não existem alunos cadastrados!");
+                throw new Exception("Não existem professores cadastrados!");
             }
 
             return new ProfessorOutputGetAllDTO {

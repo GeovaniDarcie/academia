@@ -35,7 +35,7 @@ const store = new Vuex.Store({
         context.commit('changeAluno', payload)
       },
       changeProfessor (context, payload) {
-        context.commit('changeAluno', payload)
+        context.commit('changeProfessor', payload)
       },
       changeAcademia (context, payload) {
         context.commit('changeAcademia', payload)
