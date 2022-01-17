@@ -18,9 +18,11 @@ Back-end:
 > * FluentValidation
 > * Entity Framework (ORM Code First)
 > * Swagger
-> * Acoplamento
 
 Front-end:
+> * Javascript
+> * CSS
+> * HTML
 > * Vue Js
 > * Bootrasp-Vue
 > * Axios
