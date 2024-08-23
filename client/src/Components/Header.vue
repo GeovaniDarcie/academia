@@ -57,7 +57,7 @@
               <em>usuário</em>
             </template>
             <b-dropdown-item href="#">Perfil</b-dropdown-item>
-            <b-dropdown-item href="#">Sair</b-dropdown-item>
+            <b-dropdown-item @click="exit()" href="#">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -65,6 +65,16 @@
   </div>
 </template>
 
+<script>
+export default {
+    methods: {
+        exit(){
+            localStorage.clear();
+                  this.$router.push({ name: '/' })
+            }
+    }
+}
+</script>
 <style scoped>
 .altura-header {
   height: 90px;

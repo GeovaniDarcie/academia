@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using System;
 
 namespace Academia.Data.Context
 {
@@ -7,9 +9,9 @@ namespace Academia.Data.Context
     {
         public AcademiaContext CreateDbContext(string[] args)
         {
-            var connectionString = "Integrated Security=true;Initial Catalog=academiadb;Data Source=DESKTOP-1P1RRGF\\SQLEXPRESS";
+            var connectionString = "Server=localhost;Port=5432;Database=Academia;User Id=postgres;Password=8161;";
             var optionsBuilder = new DbContextOptionsBuilder<AcademiaContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
             return new AcademiaContext(optionsBuilder.Options);
         }
     }

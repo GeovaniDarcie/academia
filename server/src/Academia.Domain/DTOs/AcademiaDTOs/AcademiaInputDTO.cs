@@ -1,5 +1,6 @@
 
 using FluentValidation;
+using System;
 
 namespace Academia.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace Academia.Domain.Entities
         public string Nome { get; set; }
         public string Endereco { get; set; }
         public string Email { get; set; }
+        public Guid IdUser { get; set; }
 
         public AcademiaInputDTO(string nome, string endereco, string email)
         {

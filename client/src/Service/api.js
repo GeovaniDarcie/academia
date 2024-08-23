@@ -1,8 +1,9 @@
 import axios from "axios";
 import store from '../store/store'
+import { getJwtClaim } from './usuarioService';
 
 const api = axios.create({
-    baseURL: 'https://localhost:5001/api/'
+    baseURL: 'https://localhost:44391/api/'
 });
 
 api.interceptors.request.use(
@@ -19,22 +20,24 @@ api.interceptors.request.use(
 );
 
 export async function post(json, recurso) {
-    console.log(json)
     try {   
         const response = await api.post(recurso, {
             ...json,
         });
 
         return response.data;
-
-    } catch(err)
+    } 
+    catch(err)
     {
-        store.state.errors = err.response.data.errors;
+        if (err.response.data.errors) {
+            store.commit('ADD_ERRORS', err.response.data.errors);
+        } else {
+            store.commit('ADD_ERRORS', [err.response.data]);
+        }
     }
 }
 
 export async function getAll(json, recurso) {
-    console.log(json)
     const response = await api.get(recurso, {
         params: {
             ...json,
@@ -51,9 +54,6 @@ export async function getById(id) {
 
 export async function updated(id, json, recurso) {
     delete json.id
-    console.log(id)
-    console.log(json)
-    console.log(recurso)
     const response = await api.put(`${recurso}/${id}`, json)
     return response.data;
 }
@@ -67,10 +67,17 @@ export async function deleteId(id, recurso) {
 export async function login(username, password) {
     try {
         store.state.loading = true;
-        const response =  await api.post('/account/login', { username, password })
-        store.state.usuario = response.data.usuario;
+        const response =  await api.post('/Authenticate/login', { username, password })
+        store.state.usuario = response.data.user;
+
+        const roleClaim = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+        var role = getJwtClaim(response.data.token, roleClaim);
+
+        store.state.usuario.role = role;
+
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("academiaId", response.data.usuario.academiaId);
+        localStorage.setItem("role", role);
+        
     } catch (e) {
         alert('Nome de usuário ou senha inválidos!');
         store.state.loading = false;

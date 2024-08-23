@@ -172,7 +172,6 @@ export default {
           Object.entries(this.errors).forEach(([ , value]) => {
             this.mensagensDeErro.push(value[0])
           });
-          console.log(this.mensagensDeErro);
           this.showAlert();
         }
         await this.buscaAcademias();

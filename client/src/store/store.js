@@ -8,12 +8,22 @@ const store = new Vuex.Store({
       aluno: {},
       autenticado: false,
       loading: false,
-      errors: {},
+      errors: [],
       usuario: {},
       academia: {},
-      professor: {}
+      professor: {},
+      dismissCountDownTeste: 0
     },
     mutations: {
+      ADD_ERRORS(state, errors) {
+        state.errors.push(...errors);
+      },
+      CLEAR_ERROR(state, index) {
+        state.errors.splice(index, 1);
+      },
+      CLEAR_ALL_ERRORS(state) {
+        state.errors = [];
+      },
       changeAluno(state, payload) {
         state.aluno = { ...payload }
       },

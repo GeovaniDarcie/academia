@@ -114,15 +114,10 @@ export default {
     },
 
     async onChange() {
-      console.log(this.selected)
       if (this.selected) {
-        console.log('this.alunoId');
-        console.log(this.alunoId);
         const treino = { dia: this.selected, alunoId: this.alunoId };
         const response = await getAll(treino, './treino/atividades');
         this.atividades = response.atividades;
-
-        console.log(this.atividades);
 
         if (!this.atividades) {
           this.atividades = [];

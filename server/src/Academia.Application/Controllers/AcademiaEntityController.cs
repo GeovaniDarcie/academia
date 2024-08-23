@@ -11,7 +11,7 @@ using System.Threading;
 namespace Academia.Application.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = "Mestre")]
+    [Authorize(Roles = "Mestre, Completo")]
     public class AcademiaEntityController : ControllerBase
     {
         private IAcademiaEntityService _service;
@@ -69,6 +69,8 @@ namespace Academia.Application.Controllers
             try
             {
                 var academia = new AcademiaEntity(inputDTO.Nome, inputDTO.Endereco, inputDTO.Email);
+                academia.IdApplicationUser = inputDTO.IdUser;
+
                 var result = await _service.Post(academia);
                 if (result != null)
                 {

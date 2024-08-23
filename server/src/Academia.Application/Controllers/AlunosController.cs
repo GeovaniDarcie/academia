@@ -63,7 +63,7 @@ namespace Academia.Application.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Completo")]
+        [Authorize(Roles = "Completo, Professor")]
         public async Task<IActionResult> Post([FromBody] AlunoInputDTO inputDTO)
         {
             if (!ModelState.IsValid)

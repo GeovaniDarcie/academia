@@ -36,7 +36,7 @@ namespace Academia.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AcademiaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ConexaoSqlServer")));
+                    options.UseNpgsql(Configuration.GetConnectionString("ConexaoSqlServer")));
 
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRespository(services);

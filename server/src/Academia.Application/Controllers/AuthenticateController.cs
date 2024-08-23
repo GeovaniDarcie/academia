@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Academia.Domain.DTOs;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthenticateController : ControllerBase {
     private readonly UserManager<ApplicationUser> userManager;
     private readonly RoleManager<IdentityRole> roleManager;
@@ -27,20 +30,37 @@ public class AuthenticateController : ControllerBase {
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
+        var validator = new RegisterModelDTOValidator();
+        var validate = validator.Validate(model);
+
+        var errorDto = new ErrosDto();
+        errorDto.Errors = validate.Errors.Select(e => e.ErrorMessage).ToList();
+
+        if (!validate.IsValid)
+        {
+            return BadRequest(errorDto);
+        }
+
         var userExists = await userManager.FindByNameAsync(model.Username);
         if (userExists != null)
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+        {
+            errorDto.Errors.Add("Usuário já existe");
+            return StatusCode(StatusCodes.Status500InternalServerError, errorDto);
+        }
 
         ApplicationUser user = new ApplicationUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = model.Username
+            UserName = model.Username,
         };
 
         var result = await userManager.CreateAsync(user, model.Password);
         if (!result.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+        {
+            errorDto.Errors = result.Errors.Select(e => e.Description).ToList();
+            return BadRequest(errorDto);
+        }
 
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
@@ -96,7 +116,7 @@ public class AuthenticateController : ControllerBase {
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
             }
 
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.Secret));
             var token = new JwtSecurityToken(
                 issuer: null,
                 audience: null,
@@ -108,7 +128,8 @@ public class AuthenticateController : ControllerBase {
             return Ok(new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = token.ValidTo
+                expiration = token.ValidTo,
+                user = user
             });
 
         }

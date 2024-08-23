@@ -1,17 +1,6 @@
 <template>
   <div class="main">
-      <b-alert
-        v-for="(mensagem, index) in mensagensDeErro"
-        :key="index"
-        class="error"
-        :show="dismissCountDown"
-        dismissible
-        variant="danger"
-        @dismissed="dismissCountDown=0"
-        @dismiss-count-down="countDownChanged"
-      >
-      {{ mensagem }}
-    </b-alert>
+      <ModalError/>
     <div class="right">
       <b-button @click="novoAluno" class="ml-2 mr-4 mb-2" variant="dark">
         Cadastrar Aluno
@@ -83,11 +72,13 @@
 import { mapState, mapActions } from "vuex";
 import { getAll, post, updated, deleteId } from "../../Service/api.js";
 import ModalCadastro from "../../Components/ModalCadastro";
+import ModalError from "../../Components/ModalError";
 
 export default {
   name: "Main",
   components: {
     ModalCadastro,
+    ModalError
   },
   data() {
     return {
@@ -145,9 +136,6 @@ export default {
     countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
     },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs
-    },
     async buscaAlunos() {
       const academiaId = localStorage.getItem("academiaId");
       const dadosPagina = { limit: this.perPage, page: this.currentPage, academiaId};
@@ -190,15 +178,7 @@ export default {
         this.$set(this.alunos, index, aluno);
       } else {
         const academiaId = localStorage.getItem("academiaId");
-        const aluno = await post({ ...this.aluno, academiaId } , './alunos');
-        
-        if (!aluno) {
-          this.mensagensDeErro = [];
-          Object.entries(this.errors).forEach(([ , value]) => {
-            this.mensagensDeErro.push(value[0])
-          });
-          this.showAlert();
-        }
+        await post({ ...this.aluno, academiaId } , './alunos');
         await this.buscaAlunos();
       }
     },
